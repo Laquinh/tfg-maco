@@ -8,13 +8,13 @@
 	\frontmatter
 	
 	% cover
-	\input{cover}
+	\input{chapters/cover}
 	
 	\mainmatter
 	
 	\pagenumbering{arabic}
 	
-	\input{acknowledgements}
+	\input{chapters/acknowledgements}
 	
 	% Table of contents
 	\newpage{\pagestyle{empty}}
@@ -31,19 +31,19 @@
 	\addcontentsline{toc}{chapter}{\numberline{}Índice de tablas}
 	\listoftables
 	
-	\input{abstract}
-	\input{glossary}
-	\input{notation}
-	\input{introduction}
-	\input{state-of-the-art}
-	\input{methodological-aspects}
-	\input{development}
-	\input{conclusions}
+	\input{chapters/abstract}
+	\input{chapters/glossary}
+	\input{chapters/notation}
+	\input{chapters/introduction}
+	\input{chapters/state-of-the-art}
+	\input{chapters/methodological-aspects}
+	\input{chapters/development}
+	\input{chapters/conclusions}
 	
 	% References
 	\newpage{\pagestyle{empty}}
 	\addcontentsline{toc}{chapter}{\numberline{}Referencias}
 	\printbibliography
 	
-	\input{annex}
+	\input{chapters/annex}
 \end{document}
