@@ -40,6 +40,41 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 		Cuando $a_{10} = 10$, suele representarse con el símbolo $\textrm{X}$, pero a efectos de cálculo toma valor $10$. Por ejemplo, $\textrm{417339361X} \in C_{\textrm{ISBN}}$.
 	\end{remark}
 \end{example}
+
+\begin{definition}
+	Sean $\textbf{x}$ e $\textbf{y}$ dos palabras de misma longitud. La \textbf{distancia de Hamming} entre ambas es igual al número de letras en que difieren. Dicho de otra forma, si $\textbf{x} = (x_1, \hdots, x_n)$ y $\textbf{y} = (y_1, \hdots, y_n)$, entonces
+	\[d(\textbf{x}, \textbf{y}) = |\{i\in[1, n]\cap\naturals \mid x_i \neq y_i\}|,\]
+	donde $d(\textbf{x}, \textbf{y})$ es la distancia de Hamming entre $\textbf{x}$ e $\textbf{y}$.
+\end{definition}
+
+\begin{theorem}
+	La distancia de Hamming entre  $\textbf{x}$ e $\textbf{y}$ tales que $\textbf{x}, \textbf{y} \in A^n$ es una distancia definida en $A^n$.
+\end{theorem}
+
+\begin{proof}
+	Se demuestran a continuación las cuatro propiedades de las distancias:
+	\begin{enumerate}
+		\item \textit{La distancia de una palabra a sí misma es $0$}: en efecto,
+		\[d(\textbf{x}, \textbf{x}) = |\{i\in[1,n]\cap\naturals \mid x_i \neq x_i\}| = |\{\}| = 0.\]
+		\item \textit{La distancia entre dos palabras distintas es positiva}: si $\textbf{x}$ e $\textbf{y}$ son palabras distintas, significa que las dos tuplas deben diferir en al menos una de las posiciones; es decir, debe existir al menos un valor de $i$ tal que $x_i \neq y_i$, por lo que la cardinalidad de $\{i \in [1, n]\cap\naturals \mid x_i \neq y_i\}$ será como mínimo de $1$.
+		\item \textit{La distancia de $\textbf{x}$ a $\textbf{y}$ es la misma que de $\textbf{y}$ a $\textbf{x}$}: se verifica
+		\[d(\textbf{x}, \textbf{y}) = |\{i\in[1,n]\cap\naturals \mid x_i \neq y_i\}| = |\{i\in[1,n]\cap\naturals \mid y_i \neq x_i\}| = d(\textbf{y}, \textbf{x}).\]
+		\item \textit{Se cumple la desigualdad triangular $d(\textbf{x}, \textbf{z}) \leq d(\textbf{x}, \textbf{y}) + d(\textbf{y}, \textbf{z})$}:
+		Se define
+		\[\Delta(\textbf{x}, \textbf{y}) = \{i\in[1,n]\cap\naturals \mid x_i \neq y_i\}.\]
+		
+		Supóngase que existen $\textbf{x}, \textbf{y}, \textbf{z} \in A^n$ tales que $d(\textbf{x}, \textbf{z}) > d(\textbf{x}, \textbf{y}) + d(\textbf{y}, \textbf{z})$. Entonces, debe existir $i \in [1, n]\cap\naturals$ tal que $i \in \Delta(\textbf{x}, \textbf{z})$, $i \notin \Delta(\textbf{x}, \textbf{y})$ e $i \notin \Delta(\textbf{y}, \textbf{z})$. Eso implica $x_i \neq z_i$ a la vez que $x_i = y_i = z_i$, lo cual es una contradicción.
+	\end{enumerate}
+\end{proof}
+
+\begin{definition}
+	La \textbf{distancia mínima} de un código $C \subseteq A^n$ es la menor de las distancias entre palabras diferentes de $C$ si $|C| > 1$, y $n+1$ en caso contrario; es decir, para códigos formados por más de una palabra,
+	\[d(C) = \min\{d(\textbf{x}, \textbf{y}) \mid \textbf{x}, \textbf{y} \in C, \textbf{x}\neq\textbf{y}\}.\]
+	
+	\begin{remark}
+		Se denotará la distancia mínima simplemente por $d$ cuando por contexto esté claro a qué código corresponde. Así, por norma general, $d = d(C)$.
+	\end{remark}
+\end{definition}
 \subsubsection{Códigos lineales}
 
 \subsubsection{Códigos cíclicos}
