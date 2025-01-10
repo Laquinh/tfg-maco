@@ -100,13 +100,27 @@
 	colback=draftBackgroundColor
 }
 
-\newtheorem*{lemma}{Lema}
 \renewenvironment{proof}{
 	\textit{Demostración.}
 }{
 	
 	$\qed$
 }
+
+\theoremstyle{theorem}
+\newtheorem{theorem}{Teorema}[section]
+
+\theoremstyle{theorem}
+\newtheorem{lemma}{Lema}
+
+\theoremstyle{definition}
+\newtheorem{example}{Ejemplo}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definición}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Nota}
 
 \pgfplotsset{compat=1.6}
 

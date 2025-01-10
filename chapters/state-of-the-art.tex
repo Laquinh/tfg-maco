@@ -17,6 +17,29 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 
 \subsubsection{Códigos de bloque}
 
+\begin{definition}
+	Un \textbf{alfabeto} es un conjunto finito no vacío cuyos elementos son denominados \textbf{letras} o \textbf{símbolos}.
+\end{definition}
+
+\begin{definition}
+	Una \textbf{palabra} sobre un alfabeto $A$ es una $n$-tupla formada por símbolos de $A$. A $n$ se la denomina \textbf{longitud} de la palabra.
+\end{definition}
+
+\begin{definition}
+	Un \textbf{código} es un conjunto de palabras sobre un mismo alfabeto. Un \textbf{código de bloque} es un código cuyas palabras tienen todas la misma longitud.
+\end{definition}
+
+\begin{example}
+	Sea $A = \mathbb{F}_2$ el alfabeto binario. El conjunto de todas las palabras binarias de longitud $5$ es el código de bloque $C = \mathbb{F}_2^5$. La palabra $\textbf{x} = (0, 1, 1, 0, 1)$ cumple $\textbf{x} \in C$.
+\end{example}
+
+\begin{example} \textbf{(Código ISBN).}
+	El código ISBN es un identificador único para libros, donde los nueve primeros dígitos de una palabra tienen valor entre $0$ y $9$ y contienen información sobre el código del país, la lengua de origen, el editor o el número del artículo; y el décimo es un \textbf{dígito de control} que verifica $\sum_{i=1}^{10} ia_i \equiv 0 \mod 11$. En términos matemáticos, $C_{\textrm{ISBN}}\subset\mathbb{F}_{11}^{10}$ es un código de bloque de longitud $10$ tal que
+	\[C_{\textrm{ISBN}} = \{\textbf{x}\in\mathbb{F}_{11}^{10} \mid (a_i = 10 \implies i = 10) \wedge \sum_{i=1}^{10}ia_i \equiv 0 \mod 11\}.\]
+	\begin{remark}
+		Cuando $a_{10} = 10$, suele representarse con el símbolo $\textrm{X}$, pero a efectos de cálculo toma valor $10$. Por ejemplo, $\textrm{417339361X} \in C_{\textrm{ISBN}}$.
+	\end{remark}
+\end{example}
 \subsubsection{Códigos lineales}
 
 \subsubsection{Códigos cíclicos}
