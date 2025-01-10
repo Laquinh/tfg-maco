@@ -83,7 +83,7 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 	\[S_r(\textbf{x}) = \{\textbf{y} \in A^n \mid d(\textbf{x}, \textbf{y}) = r\}.\]
 	\begin{remark}
 		Ya que la distancia de Hamming devuelve únicamente números naturales, es inmediata la siguiente afirmación:
-		\[B_r(\textbf{x}) = \bigcup_{i=0}^r S_r(\textbf{x}).\]
+		\[B_r(\textbf{x}) = \bigcup_{i=0}^r S_i(\textbf{x}).\]
 	\end{remark}
 \end{definition}
 
@@ -105,7 +105,7 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 	\[|S_i(\textbf{x})| = \binom{n}{i}(q - 1)^i.\]
 	
 	Finalmente, por la \textit{Nota 3}, se concluye que
-	\[|B_r(\textbf{x})| = \bigg|\bigcup_{i=0}^r S_r(\textbf{x})\bigg| = \sum_{i=0}^r |S_r(\textbf{x})| = \sum_{i=0}^r\binom{n}{i}(q - 1)^i.\]
+	\[|B_r(\textbf{x})| = \bigg|\bigcup_{i=0}^r S_i(\textbf{x})\bigg| = \sum_{i=0}^r |S_i(\textbf{x})| = \sum_{i=0}^r\binom{n}{i}(q - 1)^i.\]
 \end{proof}
 
 \subsubsection{Códigos lineales}
