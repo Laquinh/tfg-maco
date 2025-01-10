@@ -1,2 +1,22 @@
 \newpage{\pagestyle{empty}}
 \chapter{Introducción}
+
+\section{Justificación y contexto}
+
+La computación cuántica supone una amenaza a los sistemas criptográficos que están actualmente en uso. Algoritmos como RSA o ECC son vulnerables a algoritmos ideados para ser ejecutados en ordenadores cuánticos. Por ejemplo, el algoritmo de Shor puede factorizar números primos con una complejidad temporal mucho menor que los algoritmos tradicionales de fuerza bruta, causando que los métodos de encriptación clásicos queden obsoletos.
+
+La teoría de códigos se planteó inicialmente como una medida para asegurar la correcta transmisión de información a través de canales de comunicación con ruido, pero en los últimos años se ha vuelto más evidente su utilidad en cuanto al desarrollo de algoritmos de criptografía postcuántica. Se ha observado que los códigos de corrección de errores pueden resultar útiles para la seguridad de la información. De los más de 60 algoritmos presentados en la primera ronda del  Proceso de estandaricación de criptografía postcuántica del NIST, los únicos tres que de momento no han podido ser atacados eficientmente son BIKE, Classic McEliece y HQC, todos basados en técnicas de la teoría de códigos. Este panorama sugiere que la teoría de códigos tiene gran potencial para garantizar la seguridad de la comunicación en el futuro.
+
+\section{Planteamiento del problema}
+
+Debido a la amenaza que supone la computación cuántica a los métodos criptográficos actuales, es de urgente necesidad estudiar la viabilidad de alternativas que resultaren robustas en un contexto postcuántico. Asimismo, la existencia de algoritmos teóricamente robustos no es suficiente, puesto que es igualmente relevante que estos algoritmos puedan ejecutarse de manera eficiente por la mayor variedad de ordenadores como sea posible. Es de aquí que nace el interés por comparar entre sí los distintos algoritmos que se siguen valorando a día de hoy, así como por proponer una modificación a alguno de los mismos, lo cual motiva la presente investigación.
+
+\section{Objetivos del trabajo}
+
+Este trabajo de fin de grado tiene como objetivo
+\begin{itemize}
+	\item analizar y describir los diferentes tipos de códigos y su relevancia en la criptografía;
+	\item explicar las debilidades de los métodos criptográficos actuales y la urgencia de buscar soluciones resistentes a ataques por ordenadores cuánticos;
+	\item evaluar las propuestas actuales del programa del NIST;
+	\item e implementar o modificar un algoritmo existente para aumentar sus capacidades.
+\end{itemize}
