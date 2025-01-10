@@ -1,0 +1,218 @@
+\documentclass[oneside, 12pt, a4paper, tikz]{book}
+
+\usepackage{a4wide}
+\usepackage{acronym}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[style=apa,backend=biber]{biblatex}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{csquotes}
+\usepackage[spanish]{babel}
+\usepackage{enumitem}
+\usepackage{eurosym}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage[Lenny]{fncychap}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{graphicx}
+\usepackage{hyphenat}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+\usepackage{listings}
+\usepackage{longtable}
+\usepackage{makeidx}
+\usepackage{mathtools}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{polynom}
+\usepackage[normalsize]{subfigure}
+\usepackage{tcolorbox}
+\usepackage{tikz}   
+\usepackage{times}
+\usepackage{titlesec}
+\usepackage[subfigure]{tocloft}
+\usepackage{url}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{xlop}
+
+\DeclareLanguageMapping{spanish}{spanish-apa}
+
+% Dot separation on table of contents
+\renewcommand\cftchapdotsep{\cftdotsep}
+\renewcommand\cftchapleader{\cftdotfill{\cftchapdotsep}}
+
+\definecolor{pythonKeywordColor}{RGB}{100, 100, 255}
+\definecolor{pythonStringColor}{RGB}{255, 100, 100}
+\definecolor{pythonCommentColor}{RGB}{100, 175, 100}
+
+\lstset{ 
+	language=Python,         % Set the language to Python
+	basicstyle=\ttfamily\scriptsize,     % Use a monospaced font
+	keywordstyle=\color{pythonKeywordColor},% Python keywords will be blue
+	stringstyle=\color{pythonStringColor},  % Strings will be red
+	commentstyle=\color{pythonCommentColor},% Comments will be green
+	showstringspaces=false,   % Don't show spaces in strings
+	breaklines=true,           % Break lines if they are too long
+	literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\`E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
+	{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {Ø}{{\O}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1
+	{∈}{{$\in$}}1
+}
+
+\definecolor{primaryEdgeColor}{RGB}{0, 0, 0}
+\definecolor{secondaryEdgeColor}{RGB}{200, 200, 200}
+
+\definecolor{formulationFrameColor}{RGB}{255,255,255}
+\definecolor{formulationBackgroundColor}{RGB}{240,245,250}
+
+\definecolor{draftFrameColor}{RGB}{255,255,255}
+\definecolor{draftBackgroundColor}{RGB}{255,235,220}
+
+\newtcolorbox{formulationBox}{
+	colframe=formulationFrameColor,
+	colback=formulationBackgroundColor
+}
+
+\newtcolorbox{draftBox}{
+	colframe=draftFrameColor,
+	colback=draftBackgroundColor
+}
+
+\newtcolorbox{doubtBox}{
+	colframe=draftFrameColor,
+	colback=draftBackgroundColor
+}
+
+\newtheorem*{lemma}{Lema}
+\renewenvironment{proof}{
+	\textit{Demostración.}
+}{
+	
+	$\qed$
+}
+
+\pgfplotsset{compat=1.6}
+
+\pgfplotsset{soldot/.style={color=red,only marks,mark=*}} \pgfplotsset{holdot/.style={color=red,fill=white,only marks,mark=*}}
+
+\pgfplotsset{compat=newest} % used to declare my style command.  
+
+\newcommand{\newpara}{
+	\vskip 2mm
+}
+
+\newcommand{\myOver}[2]{
+	\ensuremath{\overset{\kern2pt #1}{#2}}
+}
+
+\newcommand{\final}[1]{
+	$\mathcal{F}($#1$)$
+}
+
+\renewcommand{\qed}{\hfill\blacksquare}
+
+\newcommand{\Lim}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \lim_{#1}\;$}}}
+\newcommand{\Inf}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \inf_{#1}\;$}}}
+\newcommand{\Sup}[1]{\raisebox{0.5ex}{\scalebox{0.8}{$\displaystyle \sup_{#1}\;$}}}
+\newcommand{\Sum}[2]{\displaystyle \sum_{#1}^{#2}}
+\newcommand{\Int}[2]{\displaystyle \int_{#1}^{#2}}
+\newcommand{\Bigcup}[2]{\displaystyle \bigcup_{#1}^{#2}}
+
+\newcommand{\naturals}{
+	\ensuremath{\mathbb{N}}
+}
+\newcommand{\integers}{
+	\ensuremath{\mathbb{Z}}
+}
+\newcommand{\rationals}{
+	\ensuremath{\mathbb{Q}}
+}
+\newcommand{\reals}{
+	\ensuremath{\mathbb{R}}
+}
+\newcommand{\complexes}{
+	\ensuremath{\mathbb{C}}
+}
+
+\newcommand{\cover}[1]{
+	\ensuremath{\mathcal{#1}}
+}
+
+\newcommand{\sigmaAlgebra}[1]{
+	\ensuremath{\mathcal{#1}}
+}
+
+\DeclareMathOperator{\trace}{tr}
+
+\graphicspath{ {./images/} }
+\usetikzlibrary{graphs,graphs.standard}
+
+% So words are not divided
+\pretolerance=10000
+
+\newcommand{\bigrule}{\titlerule[0.5mm]} \titleformat{\chapter}[display] 
+{\bfseries\Huge} 
+{
+	\filright 
+	\Large\chaptertitlename\ 
+	\Large 
+	\Huge \Large\thechapter} 
+{0mm}
+{\filright}
+[\vspace{0.5mm}
+] 
+\geometry{a4paper, left=2.25cm, right=2.0cm, top=3cm, bottom=2cm, headsep=1.5cm}
+
+% Show header and page number on each chapter's first page
+
+\fancypagestyle{plain}{} 
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase\leftmark}
+\fancyfoot[C]{\nouppercase\thepage}
+
+\addto\captionsspanish{\def\listtablename{\uppercase{\'{I}}\lowercase{ndice de tablas}}}
+
+% enums' style
+\setlist[itemize,1]{leftmargin=0.65cm,labelindent=0.0cm,labelsep=0.2cm}
+\setlist[enumerate,1]{leftmargin=0.65cm,labelindent=0.0cm,labelsep=0.2cm}
+\renewcommand\labelenumi{\theenumi)}
+
+% Set index and page numbering depth
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
+
+%\usepackage{wasysym}
+
+% Set spacing between paragraphs
+\setlength\parskip{0.4em plus 0.1em minus 0.1em}
+\setlength\parindent{0pt}
+
+\renewcommand\labelitemi{\raisebox{0.35ex}{\tiny$\bullet$}}
+\renewcommand{\labelitemii}{$\RHD$}
+
+% Set spacing between section number and title
+\makeatletter 
+\renewcommand{\@seccntformat}[1]{\csname the#1\endcsname\hspace{1ex}}
+
+\makeatother
+
+\renewcommand{\tablename}{Tabla} % In theory this needs to go after \begin{document}
