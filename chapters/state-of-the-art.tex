@@ -75,6 +75,39 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 		Se denotará la distancia mínima simplemente por $d$ cuando por contexto esté claro a qué código corresponde. Así, por norma general, $d = d(C)$.
 	\end{remark}
 \end{definition}
+
+\begin{definition}
+	Sea $\textbf{x} \in A^n$. La \textbf{bola cerrada de centro $\textbf{x}$ y radio $r$} se denota por $B_r(\textbf{x})$ y se define como
+	\[B_r(\textbf{x}) = \{\textbf{y} \in A^n \mid d(\textbf{x}, \textbf{y}) \leq r\}.\]
+	Similarmente, se denota por $S_r(\textbf{x})$ a la \textbf{esfera de centro $\textbf{x}$ y radio $r$}, y queda definida como
+	\[S_r(\textbf{x}) = \{\textbf{y} \in A^n \mid d(\textbf{x}, \textbf{y}) = r\}.\]
+	\begin{remark}
+		Ya que la distancia de Hamming devuelve únicamente números naturales, es inmediata la siguiente afirmación:
+		\[B_r(\textbf{x}) = \bigcup_{i=0}^r S_r(\textbf{x}).\]
+	\end{remark}
+\end{definition}
+
+\begin{theorem}
+	Sea $A$ un alfabeto con $q$ elementos y $\textbf{x} \in A^n$. Entonces,
+	\[|B_r(\textbf{x})| = \sum_{i=0}^r\binom{n}{i}(q - 1)^i.\]
+\end{theorem}
+
+\begin{proof}
+	Se define
+	\[\Delta(\textbf{x}, \textbf{y}) = \{i\in[1,n]\cap\naturals \mid x_i \neq y_i\}.\]
+	Sea $\textbf{y} \in S_i(\textbf{x})$. Por definición, $i = |\Delta(\textbf{x}, \textbf{y})|$.
+	
+	Ya que las palabras tienen longitud $n$, y se realizan $i$ cambios para llegar de $\textbf{x}$ a $\textbf{y}$, existen exactamente $\binom{n}{i}$ conjuntos $\Delta(\textbf{x}, \textbf{y})$ que verifican las ecuaciones de arriba.
+	
+	Además, para un $\Delta(\textbf{x}, \textbf{y})$ arbitrario, existen $(q - 1)^i$ posibles palabras $\textbf{y} \in S_i(\textbf{x})$ que verifican las ecuaciones.
+	
+	Así, el número de $\textbf{y} \in S_i(\textbf{x})$ que podrían verificar las ecuaciones es $\binom{n}{i}(q - 1)^i$; es decir,
+	\[|S_i(\textbf{x})| = \binom{n}{i}(q - 1)^i.\]
+	
+	Finalmente, por la \textit{Nota 3}, se concluye que
+	\[|B_r(\textbf{x})| = \bigg|\bigcup_{i=0}^r S_r(\textbf{x})\bigg| = \sum_{i=0}^r |S_r(\textbf{x})| = \sum_{i=0}^r\binom{n}{i}(q - 1)^i.\]
+\end{proof}
+
 \subsubsection{Códigos lineales}
 
 \subsubsection{Códigos cíclicos}
