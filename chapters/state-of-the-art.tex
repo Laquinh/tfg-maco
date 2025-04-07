@@ -3,12 +3,23 @@
 
 \section{Marco teórico del trabajo}
 
+\subsection{Esquemas de cifrado simétrico}
+
+\begin{definition}
+	Un \textbf{esquema de cifrado simétrico} está dado por
+	\begin{enumerate}
+		\item Un código $P$ denominado \textbf{espacio de textos planos} y otro código $C$ denominado \textbf{espacio de textos cifrados}.
+		\item Un conjunto $K$ denominado \textbf{espacio de claves}.
+		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K^2$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente fácil\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica, y por \textit{computacionalmente fácil} que no sea computacionalmente difícil.} obtener $d$ a partir de $e$ y vice versa.
+	\end{enumerate}
+\end{definition}
+
 \subsection{Esquemas de cifrado asimétrico}
 
 \subsubsection{Fundamentos}
 
 \begin{definition}
-	Una función $f : X \rightarrow Y$ es \textbf{irreversible} si para un $x \in X$ es computacionalmente fácil\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica.} calcular $f(x)$ pero para un $y \in Im(f)$ es computacionalmente difícil obtener un valor $x$ tal que $f(x) = y$, y por \textit{computacionalmente fácil} que este caso no ocurra.
+	Una función $f : X \rightarrow Y$ es \textbf{irreversible} si para un $x \in X$ es computacionalmente fácil calcular $f(x)$ pero para un $y \in Im(f)$ es computacionalmente difícil obtener un valor $x$ tal que $f(x) = y$, y por \textit{computacionalmente fácil} que este caso no ocurra.
 \end{definition}
 
 \begin{definition}
