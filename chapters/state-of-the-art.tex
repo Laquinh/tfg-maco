@@ -20,7 +20,7 @@
 	\begin{enumerate}
 		\item Un código $P$ denominado \textbf{espacio de textos planos} y otro código $C$ denominado \textbf{espacio de textos cifrados}.
 		\item Un conjunto $K$ denominado \textbf{espacio de claves}.
-		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente difícil obtener $d$ a partir de $e$.
+		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K^2$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente difícil obtener $d$ a partir de $e$.
 	\end{enumerate}
 \end{definition}
 
