@@ -28,34 +28,31 @@
 
 Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la actualidad se conoce como RSA. Consiste en tres algoritmos: uno para generar las claves, otro para el cifrado de mensajes, y otro para el descifrado.
 
-\paragraph{Generación de claves}
-\begin{enumerate}
-	\item Primero, se escogen dos números primos $p$ y $q$. Si bien el algoritmo funciona con cualesquiera primos, se recomienda el uso de valores elevados. Estos dos primos son la \textit{información adicional} que facilitará obtener la preimagen de una función irreversible con trampa.
+\begin{algorithm}
+	\caption{Generación de claves}\label{alg:1}
+	\KwData{Dos primos $p$ y $q$ cualesquiera. \Comment{Estos dos primos son la \textit{información adicional} que facilitará obtener la preimagen de una función irreversible con trampa.}}
+	\KwResult{El par de clave pública y clave privada $((e, n), d)$.}
+	$n \gets pq$ \Comment*[r]{Este valor se conoce como \textit{módulo}.}
+	$\phi = (p - 1)(q - 1)$\;
+	Seleccionar un valor $e$ tal que $1 < e < \phi$ y el menor común múltiplo entre $e$ y $\phi$ sea $1$\;
+	Utilizar el algoritmo euclideano extendido para calcular un valor $d$ tal que $eq \equiv 1 \mod \phi$\;
+\end{algorithm}
 
-	\item Una vez escogidos los primos, se calcula $n = pq$, valor al que se denomina \textbf{módulo}, y $\phi(n) = (p - 1)(q - 1)$.
+\begin{algorithm}
+	\caption{Cifrado}\label{alg:2}
+	\KwData{Un mensaje en texto plano $p$ y los valores $n$ y $e$ obtenidos en el Algoritmo 1.}
+	\KwResult{El mensaje en texto cifrado $c$.}
+	Se computa $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
+	Se calcula $c = m^e \mod n$\;
+\end{algorithm}
 
-	\item Después, se selecciona un número $e$ tal que $1 < e < \phi$ y el menor común múltiplo entre $e$ y $phi$ es $1$.
-
-	\item Finalmente, se utiliza el algoritmo euclideano extendido para calcular un valor $d$ tal que $ed \equiv 1 \mod \phi$. 
-\end{enumerate}
-
-Así, se genera un par $((e, n), d)$, donde $(e, n)$ es la clave pública y $d$ es la clave privada.
-
-\paragraph{Cifrado}
-\begin{enumerate}
-	\item Se computa $m \in [0, n) \cap \integers$ tal que el mensaje queda representado en $m$.
-	
-	\item Se calcula $c = m^e \mod n$.
-\end{enumerate}
-
-El valor $c$ es el texto cifrado.
-
-\paragraph{Descifrado}
-\begin{enumerate}
-	\item Se computa $m = c^d \mod n$.
-\end{enumerate}
-
-El valor $m$ representa al texto plano.
+\begin{algorithm}
+	\caption{Descifrado}\label{alg:3}
+	\KwData{Un mensaje en texto cifrado $c$ y los valores $n$ y $d$ obtenidos en el Algoritmo 1.}
+	\KwResult{El mensaje en texto plano $p$.}
+	Se calcula $m = c^d \mod n$\;
+	Se computa $p = f^{-1}(m)$, siendo $f$ la misma biyección utilizada en el Algoritmo 2.
+\end{algorithm}
 
 \begin{theorem}
 	Sea $c$ un texto cifrado a partir del mensaje $m$. Entonces, el valor obtenido al descifrar $c$ es el mismo valor $m$ de origen.
