@@ -100,7 +100,7 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 \end{definition}
 
 \begin{definition}
-	Una \textbf{palabra} sobre un alfabeto $A$ es una $n$-tupla formada por símbolos de $A$. A $n$ se la denomina \textbf{longitud} de la palabra.
+	Una \textbf{palabra} sobre un alfabeto $A$ es una $n$-tupla formada por símbolos de $A$. A $n$ se la denomina \textbf{longitud} de la palabra. Si $\textbf{x}$ es una palabra, se denota por $\textbf{x}_i$ la letra de $\textbf{x}$ en la posición $i$.
 \end{definition}
 
 \begin{definition}
@@ -146,6 +146,15 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 \end{proof}
 
 \begin{definition}
+	Sea $\textbf{x}$ una palabra de longitud $n$. Se llama \textbf{peso de $\textbf{x}$}, y se denomina por $w(\textbf{x})$, al número de elementos de $\textbf{x}$ distintos de $0$.
+\end{definition}
+
+\begin{definition}
+	El \textbf{peso mínimo} de un código $C$, denominado por $w(C)$, es el menor de los pesos no nulos entre las palabras diferentes de $C$. Es decir,
+	\[w(C) = \min\{w(\textbf{x}) \mid \textbf{x}\in (C - 0)\}.\]
+\end{definition}
+
+\begin{definition}
 	La \textbf{distancia mínima} de un código $C \subseteq A^n$ es la menor de las distancias entre palabras diferentes de $C$ si $|C| > 1$, y $n+1$ en caso contrario; es decir, para códigos formados por más de una palabra,
 	\[d(C) = \min\{d(\textbf{x}, \textbf{y}) \mid \textbf{x}, \textbf{y} \in C, \textbf{x}\neq\textbf{y}\}.\]
 	
@@ -187,6 +196,33 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 \end{proof}
 
 \subsubsection{Códigos lineales}
+
+\begin{definition}
+	Un \textbf{código lineal} es un código de bloque con estructura de subespacio vectorial; es decir, para un código lineal $C$ sobre $\mathbb{F}_q^n$ se cumplen las siguientes propiedades:
+	\begin{enumerate}
+		\item El código $C$ no es vacío.
+		\item Para todos $\textbf{x}, \textbf{y} \in C$ se verifica $\textbf{x} + \textbf{y} \in C$.
+		\item Para todos $\lambda \in \mathbb{F}_q, \textbf{x} \in C$ se verifica $\lambda\textbf{x} \in C$.
+	\end{enumerate}
+
+	A un código lineal de longitud $n$ y dimensión $k$ se lo denomina \textbf{$(n, k)$-código}.
+\end{definition}
+
+\begin{theorem}
+	Sea $C$ un código lineal. Se verifica $d(C) = w(C)$.
+\end{theorem}
+
+\begin{proof}
+	Sean $\textbf{x}, \textbf{y} \in C$. Ya que $C$ es un código lineal, se cumple $\textbf{x} - \textbf{y} \in C$. Obsérvese que $\textbf{x}_i = \textbf{y}_i$ implica $x_i - y_i = 0$, luego $w(\textbf{x} - \textbf{y}) = d(\textbf{x}, \textbf{y})$. Así, la distancia entre cualesquiera dos palabras es siempre igual al peso de otra, y el peso de cualquier palabra es siempre igual a la distancia entre dos otras palabras, por lo que el valor menor debe ser igual en ambos casos.
+\end{proof}
+
+\begin{definition}
+	Una \textbf{base} de un $(n, k)$-código $C$ es una $k$-tupla de palabras de $C$ tal que cada palabra de $C$ es combinación lineal de los elementos de la base.
+\end{definition}
+
+\begin{definition}
+	Una \textbf{matriz generadora} de un $(n, k)$-código es una matriz cuyas filas forman una base de $C$.
+\end{definition}
 
 \subsubsection{Códigos cíclicos}
 
