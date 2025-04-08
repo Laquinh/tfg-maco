@@ -235,6 +235,20 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 	Un \textbf{código cíclico} es un código que contiene el desplazamiento cíclico de cada una de sus palabras.
 \end{definition}
 
+\begin{remark}
+	Los códigos cíclicos pueden entenderse como un ideal. Sea $\textbf{g} \in C$. Se denota por $\textbf{g}(X)$ al polinomio
+	\[\textbf{g}(X) = \textbf{g}_1X^{n-1} + \hdots \textbf{g}_{n-1}X + \textbf{g}.\]
+	
+	Sea $\mathbb{F}_q[X] / (X^n - 1)$ el anillo cociente del anillo de polinomios $\mathbb{F}_q[X]$ módulo $X^n - 1$. En este anillo, se verifica
+	\[X^n \equiv 1 \mod X^n - 1.\]
+	
+	Así, se observa que aplicar un desplazamiento cíclico a un código $C$ es equivalente a multiplicar los polinomios asociados a cada palabra por $X$.
+\end{remark}
+
+\begin{definition}
+	El polinomio generador de un código cíclico... aun no soy capaz de entenderlo del todo. :skull:
+\end{definition}
+
 \subsubsection{Códigos polinómicos}
 
 \subsubsection{Códigos Goppa}
