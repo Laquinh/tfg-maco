@@ -259,6 +259,15 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 
 \subsubsection{Códigos de Goppa}
 
+\begin{definition}
+	Sea $L = (a_1, \dots, a_n)$ una tupla de tal que $L \in \mathbb{F}_{q^m}^n$. Un \textbf{polinomio de Goppa} con respecto a $L$ es un polinomio $g(X) \in \mathbb{F}_{q^m}[X]$ tal que $g(a_i) \neq 0$ para cualquier $i \in [1, n] \cap \naturals$.
+\end{definition}
+
+\begin{definition}
+	Un \textbf{código de Goppa} con respecto a $L$ y $g$, denotado por $\Gamma(L, g)$, es un código lineal tal que
+	\[\Gamma(L, g) = \bigg\{\textbf{x} \in \mathbb{F}_q^n \ \ \bigg|\ \ \sum_{j=1}^n \frac{\textbf{x}_j}{X - a_j} \equiv 0 \mod g(X)\bigg\}.\]
+\end{definition}
+
 \section{Trabajos relacionados}
 
 (Sobre los algoritmos BIKE, Classic McEliece y HQC).
