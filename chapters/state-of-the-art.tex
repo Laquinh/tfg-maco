@@ -251,7 +251,13 @@ Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
 
 \subsubsection{Códigos polinómicos}
 
-\subsubsection{Códigos Goppa}
+\begin{definition}
+	Sea $\alpha$ un elemento primitivo de $\mathbb{F}_q$; es decir, que cada elemento no nulo de $\mathbb{F}_q$ puede representarse como $\alpha^i \mod q$ con $i \in \naturals$. Sea $n = q - 1$. Sean $b, k \in \naturals$ tales que $0 \leq b$ y $k \leq n$. Sea $g_{b,k}(X)$ un polinomio generador tal que
+	\[g_{b,k}(X) = (X - \alpha^b)\hdots(X - \alpha^{b+n-k-1}).\]
+	Se denomina \textbf{código de Reed-Solomon}, y se denota por $RS_k(n, b)$, al código cíclico $q$-ario con polinomio generador $g_{b,k}(X)$.
+\end{definition}
+
+\subsubsection{Códigos de Goppa}
 
 \section{Trabajos relacionados}
 
