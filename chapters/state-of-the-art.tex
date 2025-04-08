@@ -69,6 +69,8 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 	Se computa $p = f^{-1}(m)$, siendo $f$ la misma biyección utilizada en el Algoritmo 2.
 \end{algorithm}
 
+\newpage
+
 \begin{theorem}
 	Sea $c$ un texto cifrado a partir del mensaje $m$. Entonces, el valor obtenido al descifrar $c$ es el mismo valor $m$ de origen.
 \end{theorem}
@@ -77,6 +79,10 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 	???
 \end{proof}
 
+Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido a cifrar es una limitación de RSA. Este es uno de los motivos por los cuales, en la práctica, el algoritmo no se utiliza para encriptar el mensaje en sí, sino para encriptar las claves del esquema de cifrado simétrico que realmente se utilizan para encriptar el mensaje.
+
+\begin{example}
+	Ejemplo con valores numéricos.
 \end{example}
 
 Explicar la matemática que hay detrás (DLP), explicar RSA, ElGamal.
