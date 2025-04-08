@@ -26,6 +26,10 @@
 	Una función irreversible $f : X \rightarrow Y$ es \textbf{irreversible con trampa} si existe información adicional con la cual sea computacionalmente fácil para un $y \in Im(f)$ obtener un valor $x$ tal que $f(x) = y$.
 \end{definition}
 
+\begin{example} \textbf{(Problema del logaritmo discreto (DLP)).}
+Sea $g : \mathbb{F}_q^* \rightarrow \mathbb{F}_q^*$ tal que $g(x) = a^x$ y $a$ genere el grupo multiplicativo $\mathbb{F}_q^*$. Dado $x$, es computacionalmente fácil calcular $g(x)$. Sin embargo, se cree que obtener una función inversa de $g$ es un problema computacionalmente difícil. Si este es el caso, $g$ se trata de una función irreversible.
+\end{example}
+
 \begin{definition}
 	Un \textbf{esquema de cifrado asimétrico} está dado por
 	\begin{enumerate}
@@ -73,8 +77,6 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 	???
 \end{proof}
 
-\begin{example} \textbf{(Problema del logaritmo discreto (DLP)).}
-	Sea $g : \mathbb{F}_q^* \rightarrow \mathbb{F}_q^*$ tal que $g(x) = a^x$ y $a$ genere el grupo multiplicativo $\mathbb{F}_q^*$. Se cree que obtener una función inversa de $g$ es un problema computacionalmente difícil.
 \end{example}
 
 Explicar la matemática que hay detrás (DLP), explicar RSA, ElGamal.
