@@ -111,13 +111,15 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	Se computa $m = c_2 * c_1^{-a} = c_2 * c_1^{g - 1 - a}$.
 \end{algorithm}
 
+\newpage
+
 \begin{theorem}
 	Sea $c$ un texto cifrado a partir del mensaje $m$. Entonces, el valor obtenido al descifrar $c$ es el mismo valor $m$ de origen.
 \end{theorem}
 
 \begin{proof}
 	Sea $m'$ el mensaje descifrado. En el algoritmo de descifrado, se computa
-	\[m' = c_2*c_1^{-a} = m*h^b*(\alpha^b)^{-a} = m*(\alpha^a)^b*(\alpha^b)^{-a} = m*\alpha^{ab-ba} = m\]
+	\[m' = c_2*c_1^{-a} = m*h^b*(\alpha^b)^{-a} = m*(\alpha^a)^b*(\alpha^b)^{-a} = m*\alpha^{ab-ba} = m.\]
 \end{proof}
 
 Explicar la matemática que hay detrás (DLP), explicar RSA, ElGamal.
