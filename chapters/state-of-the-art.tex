@@ -85,6 +85,41 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	Ejemplo con valores numéricos.
 \end{example}
 
+\subsubsection{Esquema El Gamal}
+
+\begin{algorithm}
+	\caption{Generación de claves}\label{alg:1}
+	\KwResult{El par de clave pública y clave privada $((G, \alpha, h), a)$.}
+	Escoger un grupo cíclico $(G, *)$ de orden $g$ donde la operación $*$ se ejecute de forma eficiente, y después escoger su generador $\alpha$\;
+	Escoger un número entero aleatorio $a$ tal que $1 \leq a \leq g - 2$ y computar $h = \alpha^a$.
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Cifrado}\label{alg:2}
+	\KwData{Un mensaje en texto plano $m$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
+	\KwResult{El mensaje en texto cifrado $c$.}
+	Se computa $m \in G$ mediante una biyección $f : P \rightarrow G$ tal que $m = f(p)$\;
+	Escoger un número entero $b$ aleatorio tal que $1 \leq b \leq g - 2$.
+	Calcular $c_1 = \alpha^b$ y $c_2 = m*h^b$.
+	El mensaje en texto cifrado es $c = (c_1, c_2)$.
+\end{algorithm}
+
+\begin{algorithm}
+	\caption{Descifrado}\label{alg:3}
+	\KwData{Un mensaje en texto cifrado $c$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
+	\KwResult{El mensaje en texto plano $m$.}
+	Se computa $m = c_2 * c_1^{-a} = c_2 * c_1^{g - 1 - a}$.
+\end{algorithm}
+
+\begin{theorem}
+	Sea $c$ un texto cifrado a partir del mensaje $m$. Entonces, el valor obtenido al descifrar $c$ es el mismo valor $m$ de origen.
+\end{theorem}
+
+\begin{proof}
+	Sea $m'$ el mensaje descifrado. En el algoritmo de descifrado, se computa
+	\[m' = c_2*c_1^{-a} = m*h^b*(\alpha^b)^{-a} = m*(\alpha^a)^b*(\alpha^b)^{-a} = m*\alpha^{ab-ba} = m\]
+\end{proof}
+
 Explicar la matemática que hay detrás (DLP), explicar RSA, ElGamal.
 
 \subsubsection{Vulnerabilidades}
