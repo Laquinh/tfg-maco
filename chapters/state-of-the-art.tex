@@ -91,7 +91,7 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	\caption{Generación de claves}\label{alg:1}
 	\KwResult{El par de clave pública y clave privada $((G, \alpha, h), a)$.}
 	Escoger un grupo cíclico $(G, *)$ de orden $g$ donde la operación $*$ se ejecute de forma eficiente, y después escoger su generador $\alpha$\;
-	Escoger un número entero aleatorio $a$ tal que $1 \leq a \leq g - 2$ y computar $h = \alpha^a$.
+	Escoger un número entero aleatorio $a$ tal que $1 \leq a \leq g - 2$ y computar $h = \alpha^a$\;
 \end{algorithm}
 
 \begin{algorithm}
@@ -99,9 +99,9 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	\KwData{Un mensaje en texto plano $m$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
 	\KwResult{El mensaje en texto cifrado $c$.}
 	Se computa $m \in G$ mediante una biyección $f : P \rightarrow G$ tal que $m = f(p)$\;
-	Escoger un número entero $b$ aleatorio tal que $1 \leq b \leq g - 2$.
-	Calcular $c_1 = \alpha^b$ y $c_2 = m*h^b$.
-	El mensaje en texto cifrado es $c = (c_1, c_2)$.
+	Escoger un número entero $b$ aleatorio tal que $1 \leq b \leq g - 2$\;
+	Calcular $c_1 = \alpha^b$ y $c_2 = m*h^b$\;
+	El mensaje en texto cifrado es $c = (c_1, c_2)$\;
 \end{algorithm}
 
 \begin{algorithm}
@@ -119,7 +119,7 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 
 \begin{proof}
 	Sea $m'$ el mensaje descifrado. En el algoritmo de descifrado, se computa
-	\[m' = c_2*c_1^{-a} = m*h^b*(\alpha^b)^{-a} = m*(\alpha^a)^b*(\alpha^b)^{-a} = m*\alpha^{ab-ba} = m.\]
+	\[m' = c_2*c_1^{-a} = m*h^b*(\alpha^b)^{-a} = m*(\alpha^a)^b*(\alpha^b)^{-a} = m*\alpha^{ab-ba} = m;\]
 \end{proof}
 
 \subsubsection{Vulnerabilidades}
