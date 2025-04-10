@@ -57,16 +57,16 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 	\caption{Cifrado}\label{alg:2}
 	\KwData{Un mensaje en texto plano $p$ y los valores $n$ y $e$ obtenidos en el Algoritmo 1.}
 	\KwResult{El mensaje en texto cifrado $c$.}
-	Se computa $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
-	Se calcula $c = m^e \mod n$\;
+	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
+	Calcular $c = m^e \mod n$\;
 \end{algorithm}
 
 \begin{algorithm}
 	\caption{Descifrado}\label{alg:3}
 	\KwData{Un mensaje en texto cifrado $c$ y los valores $n$ y $d$ obtenidos en el Algoritmo 1.}
 	\KwResult{El mensaje en texto plano $p$.}
-	Se calcula $m = c^d \mod n$\;
-	Se computa $p = f^{-1}(m)$, siendo $f$ la misma biyección utilizada en el Algoritmo 2.
+	Calcular $m = c^d \mod n$\;
+	Computar $p = f^{-1}(m)$, siendo $f$ la misma biyección utilizada en el Algoritmo 2.
 \end{algorithm}
 
 \newpage
@@ -98,7 +98,7 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	\caption{Cifrado}\label{alg:2}
 	\KwData{Un mensaje en texto plano $m$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
 	\KwResult{El mensaje en texto cifrado $c$.}
-	Se computa $m \in G$ mediante una biyección $f : P \rightarrow G$ tal que $m = f(p)$\;
+	Computar $m \in G$ mediante una biyección $f : P \rightarrow G$ tal que $m = f(p)$\;
 	Escoger un número entero $b$ aleatorio tal que $1 \leq b \leq g - 2$\;
 	Calcular $c_1 = \alpha^b$ y $c_2 = m*h^b$\;
 	El mensaje en texto cifrado es $c = (c_1, c_2)$\;
@@ -108,7 +108,7 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	\caption{Descifrado}\label{alg:3}
 	\KwData{Un mensaje en texto cifrado $c$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
 	\KwResult{El mensaje en texto plano $m$.}
-	Se computa $m = c_2 * c_1^{-a} = c_2 * c_1^{g - 1 - a}$.
+	Computar $m = c_2 * c_1^{-a} = c_2 * c_1^{g - 1 - a}$.
 \end{algorithm}
 
 \newpage
@@ -128,26 +128,26 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	\caption{Factorización por método de Shor}\label{}
 	\KwData{El número $N$ a factorizar.}
 	\KwResult{Los factores $p$ y $q$.}
-	Se escoge un valor $a$ al azar tal que $1 < a < N$\;
-	Se calcula $d = \mathrm{mcd}(a, N)$ con el algoritmo de Euclides\;
+	Escoger un valor $a$ al azar tal que $1 < a < N$\;
+	Calcular $d = \mathrm{mcd}(a, N)$ con el algoritmo de Euclides\;
 	\eIf{$d \neq 1$}
 	{
-		Se asigna $p = d$ y $q = N/p$\;
+		Asignar $p = d$ y $q = N/p$\;
 	}
 	{
-		Se encuentra el periodo $r$ de $a$, de forma que $a^r \equiv 1 \mod N$\;
+		Encontrar el periodo $r$ de $a$, de forma que $a^r \equiv 1 \mod N$\;
 		\eIf{$r$ es impar}
 		{
-			Se vuelve a empezar el algoritmo escogiendo un valor $a$ distinto\;
+			Volver a empezar el algoritmo escogiendo un valor $a$ distinto\;
 		}
 		{
-			Se calcula $d' = \mathrm{mcd}(a^{\frac{r}{2}} + 1, N)$\;
+			Calcular $d' = \mathrm{mcd}(a^{\frac{r}{2}} + 1, N)$\;
 			\eIf{$d' \neq 1$}
 			{
-				Se asigna $p = a^{\frac{r}{2}} + 1$ y $q = a^{\frac{r}{2}} - 1$\;
+				Asignar $p = a^{\frac{r}{2}} + 1$ y $q = a^{\frac{r}{2}} - 1$\;
 			}
 			{
-				Se vuelve a empezar el algoritmo escogiendo un valor $a$ distinto\;
+				Volver a empezar el algoritmo escogiendo un valor $a$ distinto\;
 			}
 		}
 	}
