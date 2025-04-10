@@ -124,7 +124,34 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 
 \subsubsection{Vulnerabilidades}
 
-Explicar ¿cómo? ¿por qué? funciona el algoritmo de Shor.
+\begin{algorithm}
+	\caption{Factorización por método de Shor}\label{}
+	\KwData{El número $N$ a factorizar.}
+	\KwResult{Los factores $p$ y $q$.}
+	Se escoge un valor $a$ al azar tal que $1 < a < N$\;
+	Se calcula $d = \mathrm{mcd}(a, N)$ con el algoritmo de Euclides\;
+	\eIf{$d \neq 1$}
+	{
+		Se asigna $p = d$ y $q = N/p$\;
+	}
+	{
+		Se encuentra el periodo $r$ de $a$, de forma que $a^r \equiv 1 \mod N$\;
+		\eIf{$r$ es impar}
+		{
+			Se vuelve a empezar el algoritmo escogiendo un valor $a$ distinto\;
+		}
+		{
+			Se calcula $d' = \mathrm{mcd}(a^{\frac{r}{2}} + 1, N)$\;
+			\eIf{$d' \neq 1$}
+			{
+				Se asigna $p = a^{\frac{r}{2}} + 1$ y $q = a^{\frac{r}{2}} - 1$\;
+			}
+			{
+				Se vuelve a empezar el algoritmo escogiendo un valor $a$ distinto\;
+			}
+		}
+	}
+\end{algorithm}
 
 \subsection{Fundamentos de la teoría de códigos}
 
