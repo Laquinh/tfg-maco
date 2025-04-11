@@ -124,6 +124,12 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 
 \subsubsection{Vulnerabilidades}
 
+\begin{definition}
+	Sea $f : X \rightarrow Y$ para el que existe un valor $r$ tal que $f(x + r) = f(x)$ para todo $x \in X$. Entonces, $f$ es una \textbf{función periódica} y $r$ es el \textbf{periodo} de $f$.
+\end{definition}
+
+Shor propuso un algoritmo cuántico para calcular el periodo de una función periódica de forma eficiente. Asimismo, Miller mostró que el problema de factorización se reduce a calcular el periodo de una función. Esto significa que, en un ordenador cuántico hipotético, el problema de factorización podría dejar de considerarse \textit{computacionalmente difícil} como se creía.
+
 \begin{algorithm}
 	\caption{Factorización por método de Shor}\label{}
 	\KwData{El número $N$ a factorizar.}
@@ -152,6 +158,8 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 		}
 	}
 \end{algorithm}
+
+\newpage
 
 \subsection{Fundamentos de la teoría de códigos}
 
