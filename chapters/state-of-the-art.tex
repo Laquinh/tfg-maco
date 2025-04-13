@@ -48,16 +48,16 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 	\KwData{Dos primos $p$ y $q$ cualesquiera. \Comment{Estos dos primos son la \textit{información adicional} que facilitará obtener la preimagen de una función irreversible con trampa.}}
 	\KwResult{El par de clave pública y clave privada $((e, n), d)$.}
 	$n \gets pq$ \Comment*[r]{Este valor se conoce como \textit{módulo}.}
-	$\phi = (p - 1)(q - 1)$\;
-	Seleccionar un valor $e$ tal que $1 < e < \phi$ y el menor común múltiplo entre $e$ y $\phi$ sea $1$\;
-	Utilizar el algoritmo euclideano extendido para calcular un valor $d$ tal que $ed \equiv 1 \mod \phi$\;
+	$\phi(n) = (p - 1)(q - 1)$\;
+	Seleccionar un valor $e$ tal que $1 < e < \phi(n)$ y el menor común múltiplo entre $e$ y $\phi(n)$ sea $1$\;
+	Utilizar el algoritmo euclideano extendido para calcular un valor $d$ tal que $ed \equiv 1 \mod \phi(n)$\;
 \end{algorithm}
 
 \begin{algorithm}
 	\caption{Cifrado}\label{alg:2}
 	\KwData{Un mensaje en texto plano $p$ y los valores $n$ y $e$ obtenidos en el Algoritmo 1.}
 	\KwResult{El mensaje en texto cifrado $c$.}
-	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
+	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$ de forma que $m < n$\;
 	Calcular $c = m^e \mod n$\;
 \end{algorithm}
 
@@ -76,7 +76,12 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 \end{theorem}
 
 \begin{proof}
-	???
+	Denomínese $m'$ al valor obtenido al descifrar $c$. Entonces, $m' = c^d$. Por definición, $ed \equiv 1 \mod \phi(n)$, lo cual significa que existe $k \in \integers$ tal que $ed = 1 + k\phi(n)$. Por el Teorema del Totiente de Euler, se sabe que $m^{\phi(n)} \equiv 1 \mod n$.
+	
+	Así, se obtiene
+	\[m' = c^d = (m^e)^d = m^{ed} = m^{1 + k\phi(n)} = m \cdot (m^{\phi(n)})^k \equiv m \cdot 1^k = m \mod n.\]
+	
+	Y, como $m < n$, entonces $m' \equiv m \mod n \implies m' = n$.
 \end{proof}
 
 Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido a cifrar es una limitación de RSA. Este es uno de los motivos por los cuales, en la práctica, el algoritmo no se utiliza para encriptar el mensaje en sí, sino para encriptar las claves del esquema de cifrado simétrico que realmente se utilizan para encriptar el mensaje.
