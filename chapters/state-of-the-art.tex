@@ -10,7 +10,7 @@
 	\begin{enumerate}
 		\item Un código $P$ denominado \textbf{espacio de textos planos} y otro código $C$ denominado \textbf{espacio de textos cifrados}.
 		\item Un conjunto $K$ denominado \textbf{espacio de claves}.
-		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K^2$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente fácil\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica, y por \textit{computacionalmente fácil} que no sea computacionalmente difícil.} obtener $d$ a partir de $e$ y vice versa.
+		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K^2$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente fácil\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica, y por \textit{computacionalmente fácil} que no sea computacionalmente difícil \autocite{Pellikaan_Wu_Bulygin_Jurrius_2017}.} obtener $d$ a partir de $e$ y vice versa.
 	\end{enumerate}
 \end{definition}
 
@@ -128,7 +128,7 @@ Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido
 	Sea $f : X \rightarrow Y$ para el que existe un valor $r$ tal que $f(x + r) = f(x)$ para todo $x \in X$. Entonces, $f$ es una \textbf{función periódica} y $r$ es el \textbf{periodo} de $f$.
 \end{definition}
 
-Shor propuso un algoritmo cuántico para calcular el periodo de una función periódica de forma eficiente. Asimismo, Miller mostró que el problema de factorización se reduce a calcular el periodo de una función. Esto significa que, en un ordenador cuántico hipotético, el problema de factorización podría dejar de considerarse \textit{computacionalmente difícil} como se creía.
+Shor propuso un algoritmo cuántico para calcular el periodo de una función periódica de forma eficiente \autocite{Shor_1997}. Asimismo, Miller mostró que el problema de factorización se reduce a calcular el periodo de una función \autocite{MILLER1976300}. Esto significa que, en un ordenador cuántico hipotético, el problema de factorización podría dejar de considerarse \textit{computacionalmente difícil} como se creía.
 
 \begin{algorithm}
 	\caption{Factorización por método de Shor}\label{}
@@ -315,8 +315,18 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 	Así, se observa que aplicar un desplazamiento cíclico a un código $C$ es equivalente a multiplicar los polinomios asociados a cada palabra por $X$.
 \end{remark}
 
+%Aunque la siguiente definición no es parte propia de la teoría de códigos, sí será útil conocerla para aplicarla después a los códigos cíclicos.
+
+%\begin{definition}
+%El \textbf{polinomio mínimo} de un elemento $x$ de una extensión de $F$ es el polinomio mónico $p(X) \in F[X]$ de menor grado tal que $p(x) = 0$.
+%\end{definition}
+
 \begin{definition}
-	El polinomio generador de un código cíclico... aun no soy capaz de entenderlo del todo. :skull:
+	Un \textbf{código polinómico} es un código lineal cuyas palabras son polinomios divisibles por un cierto polinomio dado. A dicho polinomio se lo denomina \textbf{polinomio generador} del código.
+\end{definition}
+
+\begin{definition}
+	El \textbf{polinomio generador} de un código cíclico es el polinomio mónico de menor grado entre los polinomios asociados a palabras del código \autocite{VERLINDE2003203}.
 \end{definition}
 
 \subsubsection{Códigos polinómicos}
