@@ -8,32 +8,32 @@
 \begin{definition}
 	Un \textbf{esquema de cifrado simétrico} está dado por
 	\begin{enumerate}
-		\item Un código $P$ denominado \textbf{espacio de textos planos} y otro código $C$ denominado \textbf{espacio de textos cifrados}.
+		\item Un conjunto $P$ denominado \textbf{espacio de textos planos} y otro conjunto $C$ denominado \textbf{espacio de textos cifrados}.
 		\item Un conjunto $K$ denominado \textbf{espacio de claves}.
-		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K^2$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente fácil\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica, y por \textit{computacionalmente fácil} que no sea computacionalmente difícil \autocite{Pellikaan_Wu_Bulygin_Jurrius_2017}.} obtener $d$ a partir de $e$ y vice versa.
+		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que existe una clave $\kappa \in K^2$ con la cual para todo $p \in P$ se cumple $D_d(E_e(p)) = p$.
 	\end{enumerate}
 \end{definition}
-
+%\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica, y por \textit{computacionalmente fácil} que no sea computacionalmente difícil \autocite{Pellikaan_Wu_Bulygin_Jurrius_2017}.}
 \subsection{Esquemas de cifrado asimétrico}
 
 \subsubsection{Fundamentos}
 
 \begin{definition}
-	Una función $f : X \rightarrow Y$ es \textbf{irreversible} si para un $x \in X$ es computacionalmente fácil calcular $f(x)$ pero para un $y \in Im(f)$ es computacionalmente difícil obtener un valor $x$ tal que $f(x) = y$, y por \textit{computacionalmente fácil} que este caso no ocurra.
-\end{definition}
-
-\begin{definition}
-	Una función irreversible $f : X \rightarrow Y$ es \textbf{irreversible con trampa} si existe información adicional con la cual sea computacionalmente fácil para un $y \in Im(f)$ obtener un valor $x$ tal que $f(x) = y$.
+	Una función $f : X \rightarrow Y$ es \textbf{unidireccional} si para un $x \in X$ es computacionalmente fácil calcular $f(x)$ pero para un $y \in Im(f)$ es computacionalmente difícil obtener un valor $x$ tal que $f(x) = y$.
 \end{definition}
 
 \begin{example} \textbf{(Problema del logaritmo discreto (DLP)).}
-Sea $g : \mathbb{F}_q^* \rightarrow \mathbb{F}_q^*$ tal que $g(x) = a^x$ y $a$ genere el grupo multiplicativo $\mathbb{F}_q^*$. Dado $x$, es computacionalmente fácil calcular $g(x)$. Sin embargo, se cree que obtener una función inversa de $g$ es un problema computacionalmente difícil. Si este es el caso, $g$ se trata de una función irreversible.
+	Sea $g : \mathbb{F}_q^* \rightarrow \mathbb{F}_q^*$ tal que $g(x) = a^x$ y $a$ genere el grupo multiplicativo $\mathbb{F}_q^*$. Dado $x$, es computacionalmente fácil calcular $g(x)$. Sin embargo, se cree que obtener una función inversa de $g$ es un problema computacionalmente difícil. Si este es el caso, $g$ se trata de una función unidireccional.
 \end{example}
+
+\begin{definition}
+	Una función unidireccional $f : X \rightarrow Y$ es \textbf{unidireccional con trampa} si existe información adicional con la cual sea computacionalmente fácil para un $y \in Im(f)$ obtener un valor $x$ tal que $f(x) = y$.
+\end{definition}
 
 \begin{definition}
 	Un \textbf{esquema de cifrado asimétrico} está dado por
 	\begin{enumerate}
-		\item Un código $P$ denominado \textbf{espacio de textos planos} y otro código $C$ denominado \textbf{espacio de textos cifrados}.
+		\item Un conjunto $P$ denominado \textbf{espacio de textos planos} y otro conjunto $C$ denominado \textbf{espacio de textos cifrados}.
 		\item Un conjunto $K$ denominado \textbf{espacio de claves}.
 		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que, dados un par $(e, d) \in K^2$ con los cuales para todo $p \in P$ se cumple $D_d(E_e(p)) = p$, es computacionalmente difícil obtener $d$ a partir de $e$.
 	\end{enumerate}
@@ -45,87 +45,37 @@ Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la 
 
 \begin{algorithm}
 	\caption{Generación de claves}\label{alg:1}
-	\KwData{Dos primos $p$ y $q$ cualesquiera. \Comment{Estos dos primos son la \textit{información adicional} que facilitará obtener la preimagen de una función irreversible con trampa.}}
+	\KwData{Dos primos $p$ y $q$ cualesquiera.}
 	\KwResult{El par de clave pública y clave privada $((e, n), d)$.}
-	$n \gets pq$ \Comment*[r]{Este valor se conoce como \textit{módulo}.}
-	$\phi(n) = (p - 1)(q - 1)$\;
-	Seleccionar un valor $e$ tal que $1 < e < \phi(n)$ y el menor común múltiplo entre $e$ y $\phi(n)$ sea $1$\;
-	Utilizar el algoritmo euclideano extendido para calcular un valor $d$ tal que $ed \equiv 1 \mod \phi(n)$\;
+	$n \gets pq$.
+	$\phi(n) = (p - 1)(q - 1)$.
+	Seleccionar un valor $e$ tal que $1 < e < \phi(n)$ y el menor común múltiplo entre $e$ y $\phi(n)$ sea $1$.
+	Utilizar el algoritmo euclideano extendido para calcular un valor $d$ tal que $ed \equiv 1 \mod \phi(n)$.
 \end{algorithm}
 
 \begin{algorithm}
 	\caption{Cifrado}\label{alg:2}
-	\KwData{Un mensaje en texto plano $p$ y los valores $n$ y $e$ obtenidos en el Algoritmo 1.}
-	\KwResult{El mensaje en texto cifrado $c$.}
-	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$ de forma que $m < n$\;
-	Calcular $c = m^e \mod n$\;
+	\KwData{Un mensaje en claro $p$ y los valores $n$ y $e$ obtenidos en el Algoritmo\,1.}
+	\KwResult{El mensaje cifrado $c$.}
+	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$ de forma que $m < n$.
+	Calcular $c = m^e \mod n$.
 \end{algorithm}
 
 \begin{algorithm}
 	\caption{Descifrado}\label{alg:3}
-	\KwData{Un mensaje en texto cifrado $c$ y los valores $n$ y $d$ obtenidos en el Algoritmo 1.}
-	\KwResult{El mensaje en texto plano $p$.}
-	Calcular $m = c^d \mod n$\;
+	\KwData{Un mensaje cifrado $c$ y los valores $n$ y $d$ obtenidos en el Algoritmo\,1.}
+	\KwResult{El mensaje en claro $p$.}
+	Calcular $m = c^d \mod n$.
 	Computar $p = f^{-1}(m)$, siendo $f$ la misma biyección utilizada en el Algoritmo 2.
 \end{algorithm}
 
 \newpage
 
-\begin{theorem}
-	Sea $c$ un texto cifrado a partir del mensaje $m$. Entonces, el valor obtenido al descifrar $c$ es el mismo valor $m$ de origen.
-\end{theorem}
-
-\begin{proof}
-	Denomínese $m'$ al valor obtenido al descifrar $c$. Entonces, $m' = c^d$. Por definición, $ed \equiv 1 \mod \phi(n)$, lo cual significa que existe $k \in \integers$ tal que $ed = 1 + k\phi(n)$. Por el Teorema del Totiente de Euler, se sabe que $m^{\phi(n)} \equiv 1 \mod n$.
-	
-	Así, se obtiene
-	\[m' = c^d = (m^e)^d = m^{ed} = m^{1 + k\phi(n)} = m \cdot (m^{\phi(n)})^k \equiv m \cdot 1^k = m \mod n.\]
-	
-	Y, como $m < n$, entonces $m' \equiv m \mod n \implies m' = n$.
-\end{proof}
-
-Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido a cifrar es una limitación de RSA. Este es uno de los motivos por los cuales, en la práctica, el algoritmo no se utiliza para encriptar el mensaje en sí, sino para encriptar las claves del esquema de cifrado simétrico que realmente se utilizan para encriptar el mensaje.
+Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido a cifrar es una limitación de RSA. Este es uno de los motivos por los cuales, en la práctica, el algoritmo no se utiliza para cifrar el mensaje en sí, sino para cifrar las claves del esquema de cifrado simétrico que realmente se utilizan para cifrar el mensaje.
 
 \begin{example}
 	Ejemplo con valores numéricos.
 \end{example}
-
-\subsubsection{Esquema El Gamal}
-
-\begin{algorithm}
-	\caption{Generación de claves}\label{alg:1}
-	\KwResult{El par de clave pública y clave privada $((G, \alpha, h), a)$.}
-	Escoger un grupo cíclico $(G, *)$ de orden $g$ donde la operación $*$ se ejecute de forma eficiente, y después escoger su generador $\alpha$\;
-	Escoger un número entero aleatorio $a$ tal que $1 \leq a \leq g - 2$ y computar $h = \alpha^a$\;
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Cifrado}\label{alg:2}
-	\KwData{Un mensaje en texto plano $m$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
-	\KwResult{El mensaje en texto cifrado $c$.}
-	Computar $m \in G$ mediante una biyección $f : P \rightarrow G$ tal que $m = f(p)$\;
-	Escoger un número entero $b$ aleatorio tal que $1 \leq b \leq g - 2$\;
-	Calcular $c_1 = \alpha^b$ y $c_2 = m*h^b$\;
-	El mensaje en texto cifrado es $c = (c_1, c_2)$\;
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Descifrado}\label{alg:3}
-	\KwData{Un mensaje en texto cifrado $c$ y los valores $h$, $\alpha$ y $G$ obtenidos en el Algoritmo 1.}
-	\KwResult{El mensaje en texto plano $m$.}
-	Computar $m = c_2 * c_1^{-a} = c_2 * c_1^{g - 1 - a}$\;
-\end{algorithm}
-
-\newpage
-
-\begin{theorem}
-	Sea $c$ un texto cifrado a partir del mensaje $m$. Entonces, el valor obtenido al descifrar $c$ es el mismo valor $m$ de origen.
-\end{theorem}
-
-\begin{proof}
-	Sea $m'$ el mensaje descifrado. En el algoritmo de descifrado, se computa
-	\[m' = c_2*c_1^{-a} = m*h^b*(\alpha^b)^{-a} = m*(\alpha^a)^b*(\alpha^b)^{-a} = m*\alpha^{ab-ba} = m.\]
-\end{proof}
 
 \subsubsection{Vulnerabilidades}
 
@@ -226,7 +176,7 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 
 \begin{definition}
 	El \textbf{peso mínimo} de un código $C$, denominado por $w(C)$, es el menor de los pesos no nulos entre las palabras diferentes de $C$. Es decir,
-	\[w(C) = \min\{w(\textbf{x}) \mid \textbf{x}\in (C - 0)\}.\]
+	\[w(C) = \min\{w(\textbf{x}) \mid \textbf{x}\in (C - \mathbf{0})\}.\]
 \end{definition}
 
 \begin{definition}
@@ -373,8 +323,8 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 
 \begin{algorithm}
 	\caption{Cifrado}\label{alg:1}
-	\KwData{Un mensaje en texto plano $\textbf{p}$, la clave pública $P_K$, dos pesos $w_r$ y $w_e$ y la longitud del mensaje $l$.}
-	\KwResult{El mensaje en texto cifrado $\textbf{c}$.}
+	\KwData{Un mensaje en claro $\textbf{p}$, la clave pública $P_K$, dos pesos $w_r$ y $w_e$ y la longitud del mensaje $l$.}
+	\KwResult{El mensaje cifrado $\textbf{c}$.}
 	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
 	Seleccionar aleatoriamente $e(X) \in \mathbb{F}_q[X] / (X^n - 1)$ tal que su peso sea igual a $w_e$\;
 	Seleccionar aleatoriamente $r_1(X), r_2(X) \in \mathbb{F}_q[X] / (X^n - 1)$ tales que su peso es igual a $w_r$\;
@@ -385,8 +335,8 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 
 \begin{algorithm}
 	\caption{Descifrado}\label{alg:1}
-	\KwData{Un mensaje en texto cifrado $\textbf{c}$ y la clave privada $S_K$.}
-	\KwResult{El mensaje en texto plano $\textbf{p}$.}
+	\KwData{Un mensaje cifrado $\textbf{c}$ y la clave privada $S_K$.}
+	\KwResult{El mensaje en claro $\textbf{p}$.}
 	Calcular $m$ decodificando $v - u \cdot y$ con un algoritmo que corrija al menos $t$ errores.
 	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
 \end{algorithm}
@@ -409,8 +359,8 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 
 \begin{algorithm}
 	\caption{Cifrado}\label{alg:1}
-	\KwData{Un mensaje en texto plano $\textbf{p}$ y la clave pública $P_K$.}
-	\KwResult{El mensaje en texto cifrado $\textbf{c}$.}
+	\KwData{Un mensaje en claro $\textbf{p}$ y la clave pública $P_K$.}
+	\KwResult{El mensaje cifrado $\textbf{c}$.}
 	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
 	Seleccionar de forma aleatoria $\textbf{e} \in \mathbb{F}_q^n$ de peso $t$\;
 	Calcular $\textbf{c} = \textbf{m}G' + \textbf{e}$\;
@@ -418,13 +368,11 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 
 \begin{algorithm}
 	\caption{Descifrado}\label{alg:1}
-	\KwData{Un mensaje en texto cifrado $\textbf{c}$ y la clave privada $S_K$.}
-	\KwResult{El mensaje en texto plano $\textbf{p}$.}
+	\KwData{Un mensaje cifrado $\textbf{c}$ y la clave privada $S_K$.}
+	\KwResult{El mensaje en claro $\textbf{p}$.}
 	Calcular $\textbf{m} = D_C(\textbf{c}P^{-1})S^{-1}$\;
 	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
 \end{algorithm}
-
-\newpage
 
 \subsection{BIKE}
 
