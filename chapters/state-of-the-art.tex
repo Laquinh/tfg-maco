@@ -303,9 +303,9 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 	\[\Gamma(L, g) = \bigg\{\textbf{x} \in \mathbb{F}_q^n \ \ \bigg|\ \ \sum_{j=1}^n \frac{\textbf{x}_j}{X - a_j} \equiv 0 \mod g(X)\bigg\}.\]
 \end{definition}
 
-\section{Trabajos relacionados}
+\subsection{Algoritmos de cifrado basados en la teoría de códigos}
 
-\subsection{HQC.PKE}
+\subsubsection{HQC.PKE}
 
 \autocite{HQC}
 
@@ -341,7 +341,7 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
 \end{algorithm}
 
-\subsection{Classic McEliece}
+\subsubsection{Classic McEliece}
 
 \autocite{McEliece}
 
@@ -374,5 +374,55 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
 \end{algorithm}
 
-\subsection{BIKE}
+\subsubsection{BIKE}
 
+\section{Trabajos relacionados}
+
+Existen varios trabajos cuyos 
+
+\subsection{Criptosistema de McEliece}
+El TFG «Criptosistema de McEliece» \autocite{McEliece2021} tiene como objetivo indagar a fondo en el algoritmo de McEliece clásico.
+
+En el comienzo del trabajo, García explica el estado del arte de la computación cuántica, así como sus consecuencias en cuanto a la seguridad criptográfica. También investiga varios algoritmos presentados en el concurso del NIST.
+
+Después, el trabajo se centra concretamente en el criptosistema de McEliece. Para ello, ofrece una breve introducción a la teoría de códigos, incidiendo en los códigos Goppa, y cómo con ella se puede definir el criptosistema. Finalmente, muestra una implementación del algoritmo y de varios ataques habituales al mismo.
+
+\subsection{Criptografía basada en códigos}
+
+En \autocite{Codes2024}, al igual que en el anterior trabajo de fin de grado, se comienza compartiendo algunas nociones sobre la teoría de códigos y sobre los problemas $NP$-completos, y se indaga en el criptosistema de McEliece.
+
+El contenido de mayor interés en este documento son las nociones sobre seguridad que se ofrecen, así como tablas con niveles de seguridad estimados para distintos valores de los parámetros del criptosistema.
+
+\subsection{McEliece-type cryptosystems: costs, security and an attack to a recent variant}
+
+Esta tesis \autocite{costs} busca analizar numerosas variaciones de los criptosistemas de McEliece, Niederreiter y Sidel'nikov. Comienza con un repaso de la teoría de códigos para continuar con su aplicación en los criptosistemas. En el estudio, se muestra cuáles variaciones son seguras y cuáles han podido ser atacadas de manera eficiente, o podrían serlo utilizando ordenadores cuánticos.
+
+Después, se discute el coste temporal y espacial de las distintas variaciones, y su seguridad ante diversos ataques.
+
+\subsection{Analysis and Implementation of the Post-Quantum Cryptographic Scheme: Classic McEliece}
+
+Esta tesis \autocite{implementation} tiene como objetivo analizar el criptosistema de McEliece en cuanto a implementación y resistencia a ataques, proponer algunas modificaciones al algoritmo, y ofrecer recomendaciones sobre los valores de parámetros que deberían usarse.
+
+Se comienza con unos preliminares de teoría de códigos, sigue con el análisis e implementación del criptosistema original y modificado, y después se ofrece un estudio sobre la seguridad frente a un tipo concreto de ataque, los ataques de temporización.
+
+\subsection{Status Report on the Fourth Round of the NIST Post-Quantum Cryptography Standardization Process}
+
+Este informe del NIST \autocite{NIST8545} hace un repaso sobre todos los algoritmos que participaron en la cuarta ronda del programa de estandarización organizado por el mismo instituto: HQC, BIKE, McEliece Clásico y SIKE.
+
+Además de explicar su funcionamiento, se comparan los algoritmos entre sí según su nivel de seguridad y su coste computacional.
+
+Cabe destacar que, aunque HQC fuera el único de los cuatro en ser seleccionado, uno de los principales motivos por los que el algoritmo de McEliece Clásico no lo fue es que ya está en proceso de estandarización por la Organización Internacional de Normalización \autocite{isoMcEliece}, y de hecho el documento no descarta considerar una estandarización compatible en un futuro.
+
+\subsection{Side-Channel Attacks on the McEliece and Niederreiter Public-Key Cryptosystems}
+
+En \autocite{Avanzi2011}, se analiza concretamente la vulnerabilidad del criptosistema de McEliece frente a ataques de canal lateral. Se explica cómo el atacante podría aprovechar fugas de información en el algoritmo original, y qué cambios podrían hacerse a la implementación para aumentar la robustez del sistema frente a los ataques.
+
+Además, incluye algunas pruebas de rendimiento de la nueva implementación con dos conjuntos de parámetros.
+
+\subsection{Comparación de los estudios}
+
+La mayoría de los trabajos relacionados se centran en analizar el criptosistema de McEliece. Algunos, como \autocite{McEliece2021, implementation}, van más allá de explicar la estructura del algoritmo, y se adentran en analizar también ataques que pueden utilizarse contra el sistema.
+
+El más relevante para el presente trabajo es el de Avanzi et. al. \autocite{Avanzi2011}, que excusivamente estudia la vulnerabilidad del criptosistema frente a ataques de canal lateral, y propone modificaciones a la implementación para combatir el ataque. Aunque se incluyen pruebas de rendimiento para la implementación propuesta, estas se realizaron con escasos conjuntos de parámetros, y no llegan a explorar todos los propuestos por el equipo de McEliece clásico para el programa del NIST \autocite{NIST8545}.
+
+Así, este Trabajo de Fin de Grado tiene como objetivo realizar una comparativa del rendimiento al ejecutar una implementación tradicional y al ejecutar la implementación con protecciones frente a este tipo de ataques, con todos los parámetros que hasta la fecha han sido más comúnmente recomendados.
