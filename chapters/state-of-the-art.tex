@@ -316,7 +316,7 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 
 \begin{definition}
 	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$, y $k$ un entero tal que $0 < k < n$. Se denomina \textbf{código de Reed-Solomon} de grado $k-1$ sobre $S$ al código
-	\[RS_{\mathbb{F}_q}(S, k) = \big\{(f(\alpha_1), \dots, f(\alpha_n)) \mid f \in \mathbb{F}_q^k[X], f(X) = \sum_i^{k-1}(X^i f_i(X)) \big\}.\]
+	\[RS_{\mathbb{F}_q}(S, k) = \big\{(f(\alpha_1), \dots, f(\alpha_n)) \mid f \in \mathbb{F}_q^k[X], f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) \big\}.\]
 \end{definition}
 
 \begin{theorem}
@@ -327,20 +327,20 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 	Se demuestran a continuación las tres propiedades de los códigos lineales:
 	\begin{enumerate}
 		\item \textit{El código no es vacío}: En efecto, para el polinomio nulo $f(X) = 0$ se verifica $f \in \mathbb{F}_q^k[X]$ y 
-		\[f(X) = \sum_i^{k-1}(X^i f_i(X)) = \sum_i^{k-1}(X^i 0) = 0,\]
+		\[f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) = \sum_{i=0}^{k-1}(X^i 0) = 0,\]
 		luego al menos la palabra $\textbf{0}$ pertenece al código.
 		\item \textit{Para todos $\textbf{x}, \textbf{y} \in RS_{\mathbb{F}_q}(S, k)$ se verifica $\textbf{x} + \textbf{y} \in RS_{\mathbb{F}_q}(S, k)$}: Sean $\textbf{x} = (f_\textbf{x}(\alpha_1), \dots, f_\textbf{x}(\alpha_n))$ e $\textbf{y} = (f_\textbf{y}(\alpha_1), \dots, f_\textbf{y}(\alpha_n))$. Entonces,
 		\[\textbf{x} + \textbf{y} = (f_\textbf{x}(\alpha_1) + f_\textbf{y}(\alpha_1), \dots, f_\textbf{x}(\alpha_n) + f_\textbf{y}(\alpha_n)) = ((f_\textbf{x} + f_\textbf{y})(\alpha_1), \dots, (f_\textbf{x} + f_\textbf{y})(\alpha_n)),\]
 		y se verifica
 		\begin{align*}
-			(f_\textbf{x} + f_\textbf{y})(X) = f_\textbf{x}(X) + f_\textbf{y}(X) &= \sum_i^{k-1}(X^i {f_\textbf{x}}_i(X)) + \sum_i^{k-1}(X^i {f_\textbf{y}}_i(X))\\
-			&= \sum_i^{k-1}(X^i({f_\textbf{x}}_i + {f_\textbf{y}}_i)(X))\\
-			&= \sum_i^{k-1}(X^i(f_\textbf{x} + f_\textbf{y})_i(X)).
+			(f_\textbf{x} + f_\textbf{y})(X) = f_\textbf{x}(X) + f_\textbf{y}(X) &= \sum_{i=0}^{k-1}(X^i {f_\textbf{x}}_i(X)) + \sum_{i=0}^{k-1}(X^i {f_\textbf{y}}_i(X))\\
+			&= \sum_{i=0}^{k-1}(X^i({f_\textbf{x}}_i + {f_\textbf{y}}_i)(X))\\
+			&= \sum_{i=0}^{k-1}(X^i(f_\textbf{x} + f_\textbf{y})_i(X)).
 		\end{align*}
 		\item \textit{Para todos $\lambda \in \mathbb{F}_q, \textbf{x} \in RS_{\mathbb{F}_q}(S, k)$ se verifica $\lambda\textbf{x} \in RS_{\mathbb{F}_q}(S, k)$}: Sea $\textbf{x} = (f(\alpha_1), \dots, f(\alpha_n))$. Entonces,
 		\[\lambda\textbf{x} = \lambda(f(\alpha_1), \dots, f(\alpha_n)) = (\lambda f(\alpha_1), \dots, \lambda f(\alpha_n)) = ((\lambda f)(\alpha_1), \dots, (\lambda f)(\alpha_n)),\]
 		y se verifica
-		\[(\lambda f)(X) = \lambda f(X) = \lambda \sum_i^{k-1}(X^i f_i(X)) = \sum_i^{k-1}(X^i \lambda f_i(X)) = \sum_i^{k-1}(X^i (\lambda f_i)(X)).\]
+		\[(\lambda f)(X) = \lambda f(X) = \lambda \sum_{i=0}^{k-1}(X^i f_i(X)) = \sum_{i=0}^{k-1}(X^i \lambda f_i(X)) = \sum_{i=0}^{k-1}(X^i (\lambda f_i)(X)).\]
 	\end{enumerate}
 \end{proof}
 
