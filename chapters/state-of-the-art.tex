@@ -220,6 +220,16 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 	\[|B_r(\textbf{x})| = \bigg|\bigcup_{i=0}^r S_i(\textbf{x})\bigg| = \sum_{i=0}^r |S_i(\textbf{x})| = \sum_{i=0}^r\binom{n}{i}(q - 1)^i.\]
 \end{proof}
 
+\subsubsection{Codificación y decodificación}
+
+Cuando dos sujetos se comunican entre sí, lo hacen enviando palabras de un código a través de un \textit{canal}, como puede ser un cable o la atmósfera. Este canal puede tener \textit{ruido}; es decir, tiene capacidad de alterar los datos transmitidos de una manera aparentemente aleatoria.
+
+Como es lógico, si todas las letras transmitidas son independientes entre sí, al verse alterada una de ellas la información que contenía se perderá. Para combatir esto, los códigos que se utilizan para la comunicación tienen \textit{redundancia}; es decir, la información se almacena en más letras de las necesarias, de forma que si una se ve alterada por el ruido, las letras de redundancia pueden ayudar a detectar que ha ocurrido el error, o incluso a corregirlo.
+
+\begin{definition}
+	La \textbf{codificación} consiste en convertir una palabra $\textbf{x}$ de un código $C$ en una letra $\textbf{x'}$ de $C'$ mediante una aplicación inyectiva $f : C \rightarrow C'$. La \textbf{decodificación} consiste en obtener una palabra $\textbf{x} \in C$ a partir de $\textbf{x'} \in C'$ tal que $f(\textbf{x}) = \textbf{x'}$.
+\end{definition}
+
 \subsubsection{Códigos lineales}
 
 \begin{definition}
