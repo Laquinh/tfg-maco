@@ -256,8 +256,26 @@ Como es lógico, si todas las letras transmitidas son independientes entre sí, 
 \end{definition}
 
 \begin{definition}
-	Una \textbf{matriz generadora} de un $(n, k)$-código es una matriz cuyas filas forman una base de $C$.
+	Una \textbf{matriz generadora} de un $(n, k)$-código $C$ es una matriz cuyas filas forman una base de $C$.
 \end{definition}
+
+\begin{definition}
+	Una \textbf{matriz de control} de un $(n, k)$-código $C$ es una matriz $H$ tal que
+	\[C = \{\textbf{c} \in \mathbb{F}_q^n \mid \textbf{c}H^t = \textbf{0}^t\}.\]
+\end{definition}
+
+\begin{definition}
+	El \textbf{síndrome} $\textbf{s}$ de una palabra $\textbf{x}$ está dado por
+	\[
+		\textbf{s} = \textbf{x}H^t.
+	\]
+\end{definition}
+
+Intuitivamente, puede entenderse que, mientras la matriz generadora sirve para \textit{generar} palabras del código (ya que se puede multiplicar la matriz por cualquier palabra para obtener una palabra del código), la matriz de control sive para \textit{detectar} las palabras: se puede multiplicar la matriz de control por cualquier palabra y, según el resultado obtenido, se deduce si dicha palabra pertenece al código o no.
+
+De hecho, es inmediato a partir de la definición de la matriz de control que una palabra pertenece a un código si y solo si su síndrome es $\textbf{0}$.
+
+\subsubsection{Decodificación por }
 
 \subsubsection{Códigos cíclicos}
 
