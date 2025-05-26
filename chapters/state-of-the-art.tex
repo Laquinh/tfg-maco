@@ -312,18 +312,42 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 	El \textbf{polinomio generador} de un código cíclico es el polinomio mónico de menor grado entre los polinomios asociados a palabras del código \autocite{VERLINDE2003203}.
 \end{definition}
 
-\subsubsection{Códigos polinómicos}
+\subsubsection{Códigos de Reed-Solomon}
 
 \begin{definition}
-	Sea $\alpha$ un elemento primitivo de $\mathbb{F}_q$; es decir, que cada elemento no nulo de $\mathbb{F}_q$ puede representarse como $\alpha^i \mod q$ con $i \in \naturals$. Sea $n = q - 1$. Sean $b, k \in \naturals$ tales que $0 \leq b$ y $k \leq n$. Sea $g_{b,k}(X)$ un polinomio generador tal que
-	\[g_{b,k}(X) = (X - \alpha^b)\hdots(X - \alpha^{b+n-k-1}).\]
-	Se denomina \textbf{código de Reed-Solomon}, y se denota por $RS_k(n, b)$, al código cíclico $q$-ario con polinomio generador $g_{b,k}(X)$.
+	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$, y $k$ un entero tal que $0 < k < n$. Se denomina \textbf{código de Reed-Solomon} de grado $k-1$ sobre $S$ al código
+	\[RS_{\mathbb{F}_q}(S, k) = \big\{(f(\alpha_1), \dots, f(\alpha_n)) \mid f \in \mathbb{F}_q^k[X], f(X) = \sum_i^{k-1}(X^i f_i(X)) \big\}.\]
 \end{definition}
+
+\begin{theorem}
+	Sea $RS_{\mathbb{F}_q}(S, k)$ un código de Reed-Solomon. Entonces, $RS_{\mathbb{F}_q}(S, k)$ es un código lineal.
+\end{theorem}
+
+\begin{proof}
+	Se demuestran a continuación las tres propiedades de los códigos lineales:
+	\begin{enumerate}
+		\item \textit{El código no es vacío}: En efecto, para el polinomio nulo $f(X) = 0$ se verifica $f \in \mathbb{F}_q^k[X]$ y 
+		\[f(X) = \sum_i^{k-1}(X^i f_i(X)) = \sum_i^{k-1}(X^i 0) = 0,\]
+		luego al menos la palabra $\textbf{0}$ pertenece al código.
+		\item \textit{Para todos $\textbf{x}, \textbf{y} \in RS_{\mathbb{F}_q}(S, k)$ se verifica $\textbf{x} + \textbf{y} \in RS_{\mathbb{F}_q}(S, k)$}: Sean $\textbf{x} = (f_\textbf{x}(\alpha_1), \dots, f_\textbf{x}(\alpha_n))$ e $\textbf{y} = (f_\textbf{y}(\alpha_1), \dots, f_\textbf{y}(\alpha_n))$. Entonces,
+		\[\textbf{x} + \textbf{y} = (f_\textbf{x}(\alpha_1) + f_\textbf{y}(\alpha_1), \dots, f_\textbf{x}(\alpha_n) + f_\textbf{y}(\alpha_n)) = ((f_\textbf{x} + f_\textbf{y})(\alpha_1), \dots, (f_\textbf{x} + f_\textbf{y})(\alpha_n)),\]
+		y se verifica
+		\begin{align*}
+			(f_\textbf{x} + f_\textbf{y})(X) = f_\textbf{x}(X) + f_\textbf{y}(X) &= \sum_i^{k-1}(X^i {f_\textbf{x}}_i(X)) + \sum_i^{k-1}(X^i {f_\textbf{y}}_i(X))\\
+			&= \sum_i^{k-1}(X^i({f_\textbf{x}}_i + {f_\textbf{y}}_i)(X))\\
+			&= \sum_i^{k-1}(X^i(f_\textbf{x} + f_\textbf{y})_i(X)).
+		\end{align*}
+		\item \textit{Para todos $\lambda \in \mathbb{F}_q, \textbf{x} \in RS_{\mathbb{F}_q}(S, k)$ se verifica $\lambda\textbf{x} \in RS_{\mathbb{F}_q}(S, k)$}: Sea $\textbf{x} = (f(\alpha_1), \dots, f(\alpha_n))$. Entonces,
+		\[\lambda\textbf{x} = \lambda(f(\alpha_1), \dots, f(\alpha_n)) = (\lambda f(\alpha_1), \dots, \lambda f(\alpha_n)) = ((\lambda f)(\alpha_1), \dots, (\lambda f)(\alpha_n)),\]
+		y se verifica
+		\[(\lambda f)(X) = \lambda f(X) = \lambda \sum_i^{k-1}(X^i f_i(X)) = \sum_i^{k-1}(X^i \lambda f_i(X)) = \sum_i^{k-1}(X^i (\lambda f_i)(X)).\]
+	\end{enumerate}
+\end{proof}
 
 \subsubsection{Códigos de Goppa}
 
 \begin{definition}
-	Sea $L = (a_1, \dots, a_n)$ una tupla de tal que $L \in \mathbb{F}_{q^m}^n$. Un \textbf{polinomio de Goppa} con respecto a $L$ es un polinomio $g(X) \in \mathbb{F}_{q^m}[X]$ tal que $g(a_i) \neq 0$ para cualquier $i \in [1, n] \cap \naturals$.
+	Sea $L = (a_1, \dots, a_n)$ una tupla tal que $L \in \mathbb{F}_{q^m}^n$. Un \textbf{polinomio de Goppa} con respecto a $L$ es un polinomio $g(X) \in \mathbb{F}_{q^m}[X]$ tal que $g(a_i) \neq 0$ para cualquier $i \in [1, n] \cap \naturals$.
 \end{definition}
 
 \begin{definition}
