@@ -345,6 +345,18 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 	\end{enumerate}
 \end{proof}
 
+\begin{definition}
+	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, $k$ un entero tal que $0 < k < n$ y $\textbf{v} \in \mathbb{F}_q^n$ tal que $w(\textbf{v}) = n$. Un \textbf{código generalizado de Reed-Solomon} es un código de la forma
+	\[GRS_{\mathbb{F}_{q^m}}(\textbf{v}, S, k) = \big\{(\textbf{v}_1f(\alpha_1), \dots, \textbf{v}_nf(\alpha_n)) \mid f \in \mathbb{F}_{q^m}^k[X], f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) \big\}.\]
+\end{definition}
+
+\subsubsection{Códigos alternantes}
+
+\begin{definition}
+	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, $k$ un entero tal que $0 < k < n$ y $\textbf{v}, \textbf{y} \in \mathbb{F}_q^n$ tales que $w(\textbf{v}) = w(\textbf{y}) = n$. Un \textbf{código alternante} es un código de la forma
+	\[A(S, \textbf{y}) = \big\{ \textbf{x}\in GRS_{\mathbb{F}_{q^m}}(\textbf{v}, S, k) \mid \textbf{x} \in \mathbb{F}_q^n \big\}.\]
+\end{definition}
+
 \subsubsection{Códigos de Goppa}
 
 \begin{definition}
@@ -356,8 +368,49 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 	\[\Gamma(L, g) = \bigg\{\textbf{x} \in \mathbb{F}_q^n \ \ \bigg|\ \ \sum_{j=1}^n \frac{\textbf{x}_j}{X - a_j} \equiv 0 \mod g(X)\bigg\}.\]
 \end{definition}
 
-\subsection{Algoritmos de cifrado basados en la teoría de códigos}
 
+\subsection{Criptosistema de McEliece}
+
+\subsubsection{Generación de claves}
+
+Primero, se escoge un código de Goppa binario $C$ de longitud $n$, dimensión $k$ y capacidad de corrección de errores $t$. Denótese por $G$ a la matriz generadora de $C$. Después, se genera de manera aleatoria una matriz binaria invertible $S$, tal que $S \in GL_k(\mathbb{F}_2)$; y una matriz de permutación $P$, tal que $P \in GL_n(\mathbb{F}_2)$.
+
+Se calcula $G' = SGP$. Esta matriz genera un código lineal aparentemente insignificante: las matrices $S$ y $P$, al haber sido creadas aleatoriamente, esconden los detalles de la matriz $G$ original.
+
+Así, la clave pública es la tupla $(G', t)$, y la privada $(S, G, P)$.
+
+\subsubsection{Cifrado}
+
+Se busca cifrar un mensaje utilizando la clave pública. Dado un mensaje $m \in \mathbb{F}_2^k$, se genera aleatoriamente una palabra $e \in \mathbb{F}_2^n$ tal que $w(e) \leq t$. El mensaje cifrado es dado por $c = mG' + e$. La palabra $e$ se utiliza para introducir ruido de manera intencionada en el mensaje cifrado. La limitación en el peso de dicha palabra es para garantizar que puedan corregirse los errores posteriormente.
+
+\subsubsection{Descifrado}
+
+Primero, se deshace la permutación del mensaje cifrado: $c' = cP^{-1} = (mG' + e)P^{-1} = mSG + eP^{-1}$. Mediante el algoritmo de decodificación de códigos Goppa, se obtiene $mS$ Finalmente, se obtiene $m = mSS^{-1}$.
+
+\subsubsection{Niederreiter}
+
+Tras la versión original de McEliece, se propusieron varios sistemas basados en el recién explicado. Uno de los más relevantes es el criptosistema de Niederreiter, que introduce las siguientes modificaciones:
+
+\begin{enumerate}
+	\item En la generación de claves, se utiliza la matriz de control $H$ en lugar de la generadora $G$.
+	\item El mensaje cifrado se calcula a través del síndrome del mensaje en claro: el mensaje $e$ se utiliza como la palabra que introduce ruido, de forma que el mensaje cifrado a transmitir es $c = H'e^t$.
+	\item En el descifrado, se comienza deshaciendo los efectos de la matriz $S$, con $c' = S^{-1}c = HPe^t$. Tras utilizar el algoritmo de decodificación de códigos Goppa, se obtiene la palabra permutada $e'$. Finalmente, se obtiene $e = Pe'$.
+\end{enumerate}
+
+Estos cambios suponen una mejora en el rendimiento del sistema, particularmente en la generación de claves y en el descifrado: al sustituir multiplicaciones entre matrices por multiplicaciones de matrices y vectores, se reduce la complejidad temporal del algoritmo significativamente. El tamaño del mensaje cifrado también es menor, pasando de $n$ a $n-k$.
+
+\subsubsection{Classic McEliece}
+
+El algoritmo de McEliece en su forma original, así como la variación de Niederreiter, presentan algunos inconvenientes:
+
+\begin{itemize}
+	\item 
+\end{itemize}
+
+Por ello, y con motivo de la participación en el concurso del NIST, se ha creado una nueva variante del sistema. Esta variante propone cambios sobre todo a nivel de implementación, aunque los conceptos básicos se mantienen.
+
+\subsection{Algoritmos de cifrado basados en la teoría de códigos}
+\autocite{Cunha13}
 \subsubsection{HQC.PKE}
 
 \autocite{HQC}
@@ -391,39 +444,6 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 	\KwData{Un mensaje cifrado $\textbf{c}$ y la clave privada $S_K$.}
 	\KwResult{El mensaje en claro $\textbf{p}$.}
 	Calcular $m$ decodificando $v - u \cdot y$ con un algoritmo que corrija al menos $t$ errores.
-	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
-\end{algorithm}
-
-\subsubsection{Classic McEliece}
-
-\autocite{McEliece}
-
-\begin{algorithm}
-	\caption{Generación de claves}\label{alg:1}
-	\KwData{La longitud del código $n$, la dimensión $k$, la cardinalidad del alfabeto $q$, la capacidad de corrección de errores $t$ y una clase $\mathcal{C}$ de $(n, k)$-códigos en $\mathbb{F}_q^n$ que posea un decodificador que pueda corregir hasta $t$ errores de manera eficiente.}
-	\KwResult{El par de clave pública y clave privada $(P_K, S_K)$.}
-	Seleccionar $C \in \mathcal{C}$. Denomínese $G$ a su matriz generadora y $D_C$ a su decodificador\;
-	Seleccionar una matriz $S$ con elementos en $\mathbb{F}_q$ de dimensiones $k \times k$\;
-	Seleccionar una matriz de permutaciones $P$ de dimensiones $n \times n$\;
-	Calcular $G' = SGP$\;
-	Asignar $P_K = G'$\;
-	Asignar $S_K = (D_C, S, P)$\;
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Cifrado}\label{alg:1}
-	\KwData{Un mensaje en claro $\textbf{p}$ y la clave pública $P_K$.}
-	\KwResult{El mensaje cifrado $\textbf{c}$.}
-	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
-	Seleccionar de forma aleatoria $\textbf{e} \in \mathbb{F}_q^n$ de peso $t$\;
-	Calcular $\textbf{c} = \textbf{m}G' + \textbf{e}$\;
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Descifrado}\label{alg:1}
-	\KwData{Un mensaje cifrado $\textbf{c}$ y la clave privada $S_K$.}
-	\KwResult{El mensaje en claro $\textbf{p}$.}
-	Calcular $\textbf{m} = D_C(\textbf{c}P^{-1})S^{-1}$\;
 	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
 \end{algorithm}
 
