@@ -315,8 +315,9 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 \subsubsection{Códigos de Reed-Solomon}
 
 \begin{definition}
-	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$, y $k$ un entero tal que $0 < k < n$. Se denomina \textbf{código de Reed-Solomon} de grado $k-1$ sobre $S$ al código
+	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, y $k$ un entero tal que $0 < k < n$. Se denomina \textbf{código de Reed-Solomon} de grado $k-1$ sobre $S$ al código
 	\[RS_{\mathbb{F}_q}(S, k) = \big\{(f(\alpha_1), \dots, f(\alpha_n)) \mid f \in \mathbb{F}_q^k[X], f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) \big\}.\]
+	\autocite{Venkatesan}
 \end{definition}
 
 \begin{theorem}
