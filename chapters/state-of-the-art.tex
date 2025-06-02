@@ -409,46 +409,6 @@ El algoritmo de McEliece en su forma original, así como la variación de Nieder
 
 Por ello, y con motivo de la participación en el concurso del NIST, se ha creado una nueva variante del sistema. Esta variante propone cambios sobre todo a nivel de implementación, aunque los conceptos básicos se mantienen.
 
-\subsection{Algoritmos de cifrado basados en la teoría de códigos}
-\autocite{Cunha13}
-\subsubsection{HQC.PKE}
-
-\autocite{HQC}
-
-\begin{algorithm}
-	\caption{Generación de claves}\label{alg:1}
-	\KwData{La longitud del código $n$, la dimensión $k$, la capacidad de corrección de errores $t$ y un peso $w$.}
-	\KwResult{El par de clave pública y clave privada $(P_K, S_K)$.}
-	Seleccionar aleatoriamente un polinomio $h(X) \in \mathbb{F}_q[X] / (X^n - 1)$\;
-	Seleccionar una matriz $G \in \mathbb{F}_q^{k \times n}$\;
-	Seleccionar aleatoriamente dos polinomios $x(X), y(X) \in \mathbb{F}_q[X] / (X^n - 1)$ tales que su peso es igual a $w$\;
-	Asignar $s(X) = x(X) + h(X) \cdot y(X)$\;
-	Asignar $S_K = (\textbf{x}, \textbf{y})$\;
-	Asignar $P_K = (\textbf{h}, \textbf{s})$\;
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Cifrado}\label{alg:1}
-	\KwData{Un mensaje en claro $\textbf{p}$, la clave pública $P_K$, dos pesos $w_r$ y $w_e$ y la longitud del mensaje $l$.}
-	\KwResult{El mensaje cifrado $\textbf{c}$.}
-	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$\;
-	Seleccionar aleatoriamente $e(X) \in \mathbb{F}_q[X] / (X^n - 1)$ tal que su peso sea igual a $w_e$\;
-	Seleccionar aleatoriamente $r_1(X), r_2(X) \in \mathbb{F}_q[X] / (X^n - 1)$ tales que su peso es igual a $w_r$\;
-	Asignar $u(X) = r_1(X) + h(X) \cdot r_2(X)$\;
-	Asignar $v = \mathtt{truncar}(mG + s \cdot r_2 + e, l)$\;
-	Asignar $\textbf{c} = (u, v)$\;
-\end{algorithm}
-
-\begin{algorithm}
-	\caption{Descifrado}\label{alg:1}
-	\KwData{Un mensaje cifrado $\textbf{c}$ y la clave privada $S_K$.}
-	\KwResult{El mensaje en claro $\textbf{p}$.}
-	Calcular $m$ decodificando $v - u \cdot y$ con un algoritmo que corrija al menos $t$ errores.
-	Computar $\textbf{p} = f^{-1}(\textbf{m})$\; 
-\end{algorithm}
-
-\subsubsection{BIKE}
-
 \section{Trabajos relacionados}
 
 Existen varios trabajos cuyos 
