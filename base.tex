@@ -40,6 +40,7 @@
 \usepackage{url}
 \usepackage{xcolor}
 \usepackage{xlop}
+\usepackage{xparse}
 
 \DeclareLanguageMapping{spanish}{spanish-apa}
 
@@ -234,3 +235,7 @@
 \makeatother
 
 \renewcommand{\tablename}{Tabla} % In theory this needs to go after \begin{document}
+	
+\newcommand{\citationNeeded}{\textbf{[Cita requerida]}}
+
+\NewDocumentCommand{\todo}{o}{\textbf{[Por hacer\IfValueT{#1}{: #1}]}}
