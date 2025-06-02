@@ -10,7 +10,7 @@
 	\begin{enumerate}
 		\item Un conjunto $P$ denominado \textbf{espacio de textos planos} y otro conjunto $C$ denominado \textbf{espacio de textos cifrados}.
 		\item Un conjunto $K$ denominado \textbf{espacio de claves}.
-		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que existe una clave $\kappa \in K^2$ con la cual para todo $p \in P$ se cumple $D_d(E_e(p)) = p$.
+		\item Un conjunto $\{E_e : P \rightarrow C \mid e \in K\}$ cuyos elementos se denominan \textbf{transformaciones de cifrado} y un conjunto $\{D_d : C \rightarrow P \mid d \in K\}$ cuyos elementos se denominan \textbf{transformaciones de descifrado} tales que existe una clave $\kappa \in K^2$ con la cual para todo $p \in P$ se cumple $D_d(E_e(p)) = p$. \todo[Repasar esta definición]
 	\end{enumerate}
 \end{definition}
 %\footnote{Si bien este concepto puede ser definido de una manera más rigurosa, ya que esto queda fuera del ámbito de este trabajo, entiéndase por \textit{computacionalmente difícil} que el número de operaciones que hacen falta para obtener $d$ a partir de $e$ es tan grande que resulta inviable llevarlo a la práctica, y por \textit{computacionalmente fácil} que no sea computacionalmente difícil \autocite{Pellikaan_Wu_Bulygin_Jurrius_2017}.}
@@ -44,34 +44,34 @@
 Uno de los esquemas de cifrado asimétrico más frecuentemente utilizados en la actualidad se conoce como RSA. Consiste en tres algoritmos: uno para generar las claves, otro para el cifrado de mensajes, y otro para el descifrado.
 
 \begin{algorithm}
-	\caption{Generación de claves}\label{alg:1}
+	\caption{Generación de claves (RSA)}\label{alg:1}
 	\KwData{Dos primos $p$ y $q$ cualesquiera.}
 	\KwResult{El par de clave pública y clave privada $((e, n), d)$.}
-	$n \gets pq$.
-	$\phi(n) = (p - 1)(q - 1)$.
-	Seleccionar un valor $e$ tal que $1 < e < \phi(n)$ y el menor común múltiplo entre $e$ y $\phi(n)$ sea $1$.
+	$n \gets pq$.\\
+	$\phi(n) = (p - 1)(q - 1)$.\\
+	Seleccionar un valor $e$ tal que $1 < e < \phi(n)$ y el menor común múltiplo entre $e$ y $\phi(n)$ sea $1$.\\
 	Utilizar el algoritmo euclideano extendido para calcular un valor $d$ tal que $ed \equiv 1 \mod \phi(n)$.
 \end{algorithm}
 
 \begin{algorithm}
-	\caption{Cifrado}\label{alg:2}
+	\caption{Cifrado (RSA)}\label{alg:2}
 	\KwData{Un mensaje en claro $p$ y los valores $n$ y $e$ obtenidos en el Algoritmo\,1.}
 	\KwResult{El mensaje cifrado $c$.}
-	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$ de forma que $m < n$.
+	Computar $m \in [0, p) \cap \integers$ mediante una biyección $f$ tal que $m = f(p)$ de forma que $m < n$.\\
 	Calcular $c = m^e \mod n$.
 \end{algorithm}
 
 \begin{algorithm}
-	\caption{Descifrado}\label{alg:3}
+	\caption{Descifrado (RSA)}\label{alg:3}
 	\KwData{Un mensaje cifrado $c$ y los valores $n$ y $d$ obtenidos en el Algoritmo\,1.}
 	\KwResult{El mensaje en claro $p$.}
-	Calcular $m = c^d \mod n$.
+	Calcular $m = c^d \mod n$.\\
 	Computar $p = f^{-1}(m)$, siendo $f$ la misma biyección utilizada en el Algoritmo 2.
 \end{algorithm}
 
 \newpage
 
-Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido a cifrar es una limitación de RSA. Este es uno de los motivos por los cuales, en la práctica, el algoritmo no se utiliza para cifrar el mensaje en sí, sino para cifrar las claves del esquema de cifrado simétrico que realmente se utilizan para cifrar el mensaje.
+Debido a que el texto cifrado es un valor módulo $n$, la longitud del contenido a cifrar es una limitación de RSA. Este es uno de los motivos por los cuales, en la práctica, el algoritmo no se utiliza para cifrar el mensaje en sí, sino para cifrar las claves del esquema de cifrado simétrico que realmente se utiliza para cifrar el mensaje.
 
 \begin{example}
 	Ejemplo con valores numéricos.
@@ -428,7 +428,7 @@ El contenido de mayor interés en este documento son las nociones sobre segurida
 
 \subsection{McEliece-type cryptosystems: costs, security and an attack to a recent variant}
 
-Esta tesis \autocite{costs} busca analizar numerosas variaciones de los criptosistemas de McEliece, Niederreiter y Sidel'nikov. Comienza con un repaso de la teoría de códigos para continuar con su aplicación en los criptosistemas. En el estudio, se muestra cuáles variaciones son seguras y cuáles han podido ser atacadas de manera eficiente, o podrían serlo utilizando ordenadores cuánticos.
+Esta tesis \autocite{costs} busca analizar numerosas variaciones de los criptosistemas de McEliece, Niederreiter y Sidel'nikov. Comienza con un repaso de la teoría de códigos para continuar con su aplicación en los criptosistemas. En el estudio, se muestra qué variaciones son seguras y cuáles han podido ser atacadas de manera eficiente, o podrían serlo utilizando ordenadores cuánticos.
 
 Después, se discute el coste temporal y espacial de las distintas variaciones, y su seguridad ante diversos ataques.
 
