@@ -175,7 +175,7 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 \end{definition}
 
 \begin{definition}
-	El \textbf{peso mínimo} de un código $C$, denominado por $w(C)$, es el menor de los pesos no nulos entre las palabras diferentes de $C$. Es decir,
+	El \textbf{peso mínimo} de un código $C$, denotado por $w(C)$, es el menor de los pesos no nulos entre las palabras diferentes de $C$. Es decir,
 	\[w(C) = \min\{w(\textbf{x}) \mid \textbf{x}\in (C - \mathbf{0})\}.\]
 \end{definition}
 
@@ -209,11 +209,11 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 	\[\Delta(\textbf{x}, \textbf{y}) = \{i\in[1,n]\cap\naturals \mid x_i \neq y_i\}.\]
 	Sea $\textbf{y} \in S_i(\textbf{x})$. Por definición, $i = |\Delta(\textbf{x}, \textbf{y})|$.
 	
-	Ya que las palabras tienen longitud $n$, y se realizan $i$ cambios para llegar de $\textbf{x}$ a $\textbf{y}$, existen exactamente $\binom{n}{i}$ conjuntos $\Delta(\textbf{x}, \textbf{y})$ que verifican las ecuaciones de arriba.
+	Ya que las palabras tienen longitud $n$, y se realizan $i$ cambios para llegar de $\textbf{x}$ a $\textbf{y}$, existen exactamente $\binom{n}{i}$ conjuntos $\Delta(\textbf{x}, \textbf{y})$ que verifican las ecuaciones anteriores.
 	
 	Además, para un $\Delta(\textbf{x}, \textbf{y})$ arbitrario, existen $(q - 1)^i$ posibles palabras $\textbf{y} \in S_i(\textbf{x})$ que verifican las ecuaciones.
 	
-	Así, el número de $\textbf{y} \in S_i(\textbf{x})$ que podrían verificar las ecuaciones es $\binom{n}{i}(q - 1)^i$; es decir,
+	Así, el número de $\textbf{y} \in S_i(\textbf{x})$ que podrían verificar las ecuaciones es $\displaystyle{\binom{n}{i}(q - 1)^i}$; es decir,
 	\[|S_i(\textbf{x})| = \binom{n}{i}(q - 1)^i.\]
 	
 	Finalmente, por la \textit{Nota 3}, se concluye que
@@ -224,7 +224,7 @@ Shor propuso un algoritmo cuántico para calcular el periodo de una función per
 
 Cuando dos sujetos se comunican entre sí, lo hacen enviando palabras de un código a través de un \textit{canal}, como puede ser un cable o la atmósfera. Este canal puede tener \textit{ruido}; es decir, tiene capacidad de alterar los datos transmitidos de una manera aparentemente aleatoria.
 
-Como es lógico, si todas las letras transmitidas son independientes entre sí, al verse alterada una de ellas la información que contenía se perderá. Para combatir esto, los códigos que se utilizan para la comunicación tienen \textit{redundancia}; es decir, la información se almacena en más letras de las necesarias, de forma que si una se ve alterada por el ruido, las letras de redundancia pueden ayudar a detectar que ha ocurrido el error, o incluso a corregirlo.
+Como es lógico, si todas las letras transmitidas son independientes entre sí, al verse alterada una de ellas la información que contenía inicialmente se perderá. Para combatir esto, los códigos que se utilizan para la comunicación tienen \textit{redundancia}; es decir, la información se almacena en más letras de las necesarias, de forma que si una se ve alterada por el ruido, las letras de redundancia pueden ayudar a detectar que ha ocurrido el error, o incluso a corregirlo.
 
 \begin{definition}
 	La \textbf{codificación} consiste en convertir una palabra $\textbf{x}$ de un código $C$ en una letra $\textbf{x'}$ de $C'$ mediante una aplicación inyectiva $f : C \rightarrow C'$. La \textbf{decodificación} consiste en obtener una palabra $\textbf{x} \in C$ a partir de $\textbf{x'} \in C'$ tal que $f(\textbf{x}) = \textbf{x'}$.
@@ -235,7 +235,7 @@ Como es lógico, si todas las letras transmitidas son independientes entre sí, 
 \begin{definition}
 	Un \textbf{código lineal} es un código de bloque con estructura de subespacio vectorial; es decir, para un código lineal $C$ sobre $\mathbb{F}_q^n$ se cumplen las siguientes propiedades:
 	\begin{enumerate}
-		\item El código $C$ no es vacío.
+		\item El código $C$ es un conjunto no vacío.
 		\item Para todos $\textbf{x}, \textbf{y} \in C$ se verifica $\textbf{x} + \textbf{y} \in C$.
 		\item Para todos $\lambda \in \mathbb{F}_q, \textbf{x} \in C$ se verifica $\lambda\textbf{x} \in C$.
 	\end{enumerate}
@@ -312,16 +312,16 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 	El \textbf{polinomio generador} de un código cíclico es el polinomio mónico de menor grado entre los polinomios asociados a palabras del código \autocite{VERLINDE2003203}.
 \end{definition}
 
-\subsubsection{Códigos de Reed-Solomon}
+\subsubsection{Códigos Reed-Solomon}
 
 \begin{definition}
-	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, y $k$ un entero tal que $0 < k < n$. Se denomina \textbf{código de Reed-Solomon} de grado $k-1$ sobre $S$ al código
-	\[RS_{\mathbb{F}_q}(S, k) = \big\{(f(\alpha_1), \dots, f(\alpha_n)) \mid f \in \mathbb{F}_q^k[X], f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) \big\}.\]
-	\autocite{Venkatesan}
+	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, y $k$ un entero tal que $0 < k < n$. Se denomina \textbf{código Reed-Solomon} de grado $k-1$ sobre $S$ al código
+	\[RS_{\mathbb{F}_q}(S, k) = \big\{(f(\alpha_1), \dots, f(\alpha_n)) \mid f \in \mathbb{F}_q^k[X], f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) \big\}\]
+	\autocite{Venkatesan}.
 \end{definition}
 
 \begin{theorem}
-	Sea $RS_{\mathbb{F}_q}(S, k)$ un código de Reed-Solomon. Entonces, $RS_{\mathbb{F}_q}(S, k)$ es un código lineal.
+	Sea $RS_{\mathbb{F}_q}(S, k)$ un código Reed-Solomon. Entonces, $RS_{\mathbb{F}_q}(S, k)$ es un código lineal.
 \end{theorem}
 
 \begin{proof}
@@ -346,7 +346,7 @@ De hecho, es inmediato a partir de la definición de la matriz de control que un
 \end{proof}
 
 \begin{definition}
-	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, $k$ un entero tal que $0 < k < n$ y $\textbf{v} \in \mathbb{F}_q^n$ tal que $w(\textbf{v}) = n$. Un \textbf{código generalizado de Reed-Solomon} es un código de la forma
+	Sea $S = (\alpha_1, \dots, \alpha_n)$ una tupla tal que $S \in \mathbb{F}_q^n$ y $\alpha_i \neq \alpha_j$ si $i \neq j$, $k$ un entero tal que $0 < k < n$ y $\textbf{v} \in \mathbb{F}_q^n$ tal que $w(\textbf{v}) = n$. Un \textbf{código generalizado Reed-Solomon} es un código de la forma
 	\[GRS_{\mathbb{F}_{q^m}}(\textbf{v}, S, k) = \big\{(\textbf{v}_1f(\alpha_1), \dots, \textbf{v}_nf(\alpha_n)) \mid f \in \mathbb{F}_{q^m}^k[X], f(X) = \sum_{i=0}^{k-1}(X^i f_i(X)) \big\}.\]
 \end{definition}
 
